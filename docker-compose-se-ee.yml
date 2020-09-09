@@ -1,0 +1,38 @@
+version: "3"
+services:
+  graphdb:
+    build:
+      context: graphdb
+      dockerfile: Dockerfile-se-ee
+      args:
+        GRAPHDB_LICENSE_FILE: graphdb.license
+    container_name: graphdb
+    ports:
+      - "7200:7200"
+    volumes:
+      - ./:/graphdb
+  backend:
+    depends_on:
+      - graphdb
+    entrypoint: ["/backend/backend/wait-for-it.sh", "http://graphdb:7200", "--", "/usr/local/tomcat/bin/catalina.sh", "run"]
+    build:
+      context: ../termit
+      args:
+        REPOSITORY_URL: http://graphdb:7200/repositories/termit
+    container_name: backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/backend
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ../termit-ui
+      args:
+        SERVER_URL: http://localhost:8080/termit
+    container_name: frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./:/frontend
