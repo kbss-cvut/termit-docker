@@ -3,8 +3,9 @@ services:
   graphdb:
     build:
       context: graphdb
+      dockerfile: Dockerfile-se-ee
       args:
-        version: 9.3.3
+        GRAPHDB_LICENSE_FILE: graphdb.license
     container_name: graphdb
     ports:
       - "7200:7200"
