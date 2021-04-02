@@ -1,37 +1,57 @@
 version: "3"
 services:
-  graphdb:
+  termit-graphdb:
     build:
       context: graphdb
       args:
-        version: 9.3.3
-    container_name: graphdb
+        GRAPHDB_ZIP: graphdb-free-9.7.0-dist.zip
+    image: termit-graphdb
+    container_name: termit-graphdb
+    environment:
+      GDB_JAVA_OPTS: >-
+        -Dgraphdb.workbench.external-url=${URL}/graphdb
+        -Dgraphdb.external-url=${URL}/sluzby/graphdb
+      GRAPHDB_WORKBENCH_EXTERNAL_URL: ${URL}/graphdb
+      GRAPHDB_EXTERNAL_URL: ${URL}/sluzby/graphdb
+    networks:
+      - termit
+    restart: always
     ports:
       - "7200:7200"
     volumes:
-      - ./:/graphdb
-  backend:
+      - termit-graphdb:/graphdb/home
+  termit-server:
     depends_on:
-      - graphdb
-    entrypoint: ["/backend/backend/wait-for-it.sh", "http://graphdb:7200", "--", "/usr/local/tomcat/bin/catalina.sh", "run"]
-    build:
-      context: ../termit
-      args:
-        REPOSITORY_URL: http://graphdb:7200/repositories/termit
-    container_name: backend
+      - termit-graphdb
+    image: registry.gitlab.fel.cvut.cz:443/kbss/termit-backend:ipr-dev-latest
+    container_name: termit-backend
+    environment:
+      CATALINA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
+      REPOSITORY_URL: http://termit-graphdb:7200/repositories/termit
+      REPOSITORY_PUBLICURL: http://localhost:17200/repositories/termit
+      REPOSITORY_USERNAME:
+      REPOSITORY_PASSWORD:
+      FILE_STORAGE: /tmp/storage
+      TEXTANALYSIS_URL: https://localhost/annotate?enableKeywordExtraction=true
+    networks:
+      - termit
     ports:
       - "8080:8080"
     volumes:
-      - ./:/backend
-  frontend:
+      - termit-server:/tmp
+  termit:
     depends_on:
-      - backend
-    build:
-      context: ../termit-ui
-      args:
-        SERVER_URL: http://localhost:8080/termit
-    container_name: frontend
+      - termit-server
+    image: registry.gitlab.fel.cvut.cz:443/kbss/termit-frontend:ipr-dev-latest
+    container_name: termit
+    # TODO parameterize frontend build to accept env SERVER_URL
+    networks:
+      - termit
+      - default
     ports:
       - "3000:80"
-    volumes:
-      - ./:/frontend
+volumes:
+  termit-graphdb:
+  termit-server:
+networks:
+  termit:

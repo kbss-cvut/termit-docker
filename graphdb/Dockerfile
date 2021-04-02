@@ -1,33 +1,33 @@
-# adopted from https://raw.githubusercontent.com/Ontotext-AD/graphdb-docker/master/free-edition/Dockerfile
+FROM openjdk:11
 
-FROM adoptopenjdk/openjdk11:alpine
+ARG GRAPHDB_ZIP
 
-# Build time arguments
-ARG version=9.1.1
-ARG edition=free
+RUN \
+    # Check for mandatory build arguments
+    : "${GRAPHDB_ZIP:?Provide the downloaded GraphDB Free ZIP file}"
 
-ENV GRAPHDB_PARENT_DIR=/opt/graphdb
-ENV GRAPHDB_HOME=${GRAPHDB_PARENT_DIR}/home
+ENV GRAPHDB_VOLUME=/graphdb
+ENV GRAPHDB_HOME=${GRAPHDB_VOLUME}/home
+ENV GRAPHDB_INSTALL_DIR=${GRAPHDB_VOLUME}/dist
+RUN mkdir -p $GRAPHDB_VOLUME $GRAPHDB_INSTALL_DIR $GRAPHDB_HOME
 
-ENV GRAPHDB_INSTALL_DIR=${GRAPHDB_PARENT_DIR}/dist
+ADD $GRAPHDB_ZIP /tmp/$GRAPHDB_ZIP
 
-ADD graphdb-${edition}-${version}-dist.zip /tmp
-
-RUN apk add --no-cache bash util-linux procps net-tools busybox-extras wget less curl && \
-    mkdir -p ${GRAPHDB_PARENT_DIR} && \
-    cd ${GRAPHDB_PARENT_DIR} && \
-    unzip /tmp/graphdb-${edition}-${version}-dist.zip && \
-    rm /tmp/graphdb-${edition}-${version}-dist.zip && \
-    mv graphdb-${edition}-${version} dist && \
-    mkdir -p ${GRAPHDB_HOME}
+WORKDIR /tmp
+RUN unzip $GRAPHDB_ZIP
+RUN export GRAPHDB_DIR=`ls -d graphdb*/` && mv $GRAPHDB_DIR/* $GRAPHDB_INSTALL_DIR
 
 ENV PATH=${GRAPHDB_INSTALL_DIR}/bin:$PATH
 
+ADD rulesets /rulesets
+
+ADD init /root/graphdb-import
+
 RUN rm -rf ${GRAPHDB_HOME}/data
+
 COPY data ${GRAPHDB_HOME}/data
+COPY conf ${GRAPHDB_HOME}/conf
 
-CMD ["-Dgraphdb.home=/opt/graphdb/home"]
-
-ENTRYPOINT ["/opt/graphdb/dist/bin/graphdb"]
-
+CMD ["-Dgraphdb.home=/graphdb/home","-Dgraphdb.logback=conf/logback.xml"]
+ENTRYPOINT ["/graphdb/dist/bin/graphdb"]
 EXPOSE 7200
