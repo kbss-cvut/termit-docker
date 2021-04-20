@@ -1,40 +1,43 @@
-version: "3"
+version: "3.9"
 services:
-  termit-graphdb:
+  termit-nginx:
     build:
-      context: graphdb
+      context: nginx
       args:
-        GRAPHDB_ZIP: graphdb-free-9.7.0-dist.zip
-    image: termit-graphdb
-    container_name: termit-graphdb
+        CONTEXT: ${ROOT}
+    image: termit-nginx
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    depends_on:
+      - termit
+      - termit-server
+      - termit-db-server
+  termit-db-server:
+    build:
+      context: db-server
+      args:
+        GRAPHDB_ZIP: graphdb-free-9.6.0-dist.zip
+    image: termit-db-server
     environment:
       GDB_JAVA_OPTS: >-
-        -Dgraphdb.workbench.external-url=${URL}/graphdb
-        -Dgraphdb.external-url=${URL}/sluzby/graphdb
-      GRAPHDB_WORKBENCH_EXTERNAL_URL: ${URL}/graphdb
-      GRAPHDB_EXTERNAL_URL: ${URL}/sluzby/graphdb
-    networks:
-      - termit
+        -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server
     restart: always
     ports:
       - "7200:7200"
     volumes:
-      - termit-graphdb:/graphdb/home
+      - termit-db-server:/graphdb/home
   termit-server:
     depends_on:
-      - termit-graphdb
-    image: registry.gitlab.fel.cvut.cz:443/kbss/termit-backend:ipr-dev-latest
-    container_name: termit-backend
+      - termit-db-server
+    image: termit-server
     environment:
-      CATALINA_OPTS: -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
-      REPOSITORY_URL: http://termit-graphdb:7200/repositories/termit
-      REPOSITORY_PUBLICURL: http://localhost:17200/repositories/termit
-      REPOSITORY_USERNAME:
-      REPOSITORY_PASSWORD:
+      REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
+      REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
+      SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       FILE_STORAGE: /tmp/storage
-      TEXTANALYSIS_URL: https://localhost/annotate?enableKeywordExtraction=true
-    networks:
-      - termit
+      TEXTANALYSIS_URL: https://localhost/annotate?enableKeywordExtraction=true # TODO parameterize
     ports:
       - "8080:8080"
     volumes:
@@ -42,16 +45,12 @@ services:
   termit:
     depends_on:
       - termit-server
-    image: registry.gitlab.fel.cvut.cz:443/kbss/termit-frontend:ipr-dev-latest
-    container_name: termit
-    # TODO parameterize frontend build to accept env SERVER_URL
-    networks:
-      - termit
-      - default
+    image: termit
+    environment:
+      REACT_APP_SERVER_URL: ${URL}${ROOT}/sluzby/server
+      SERVER_URL: ${URL}${ROOT}/sluzby/server
     ports:
       - "3000:80"
 volumes:
-  termit-graphdb:
+  termit-db-server:
   termit-server:
-networks:
-  termit:
