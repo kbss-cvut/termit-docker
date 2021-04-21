@@ -5,15 +5,16 @@ TermIt docker serves to spin off a TermIt deployment, consisting of :
 - TermIt UI (frontend)
 
 ## Prerequisities
-First, You should have Docker installed (and accessible under current user).
+First, You should have Docker & Docker Compose installed (and accessible under current user).
 Second, You need a valid GraphDB Free installation package (or a valid SE or EE license).
+Third, You need to have docker images of [termit](https://github.com/kbss-cvut/termit-ui) and [termit-server](https://github.com/kbss-cvut/termit) built.
 
 Edit `docker-compose.yml`:
-- change backend.build.context and frontend.build.context to point to your local directories of 
-TermIt (clone of `https://github.com/kbss-cvut/termit`) and TermIt UI (clone of `https://github.com/kbss-cvut/termit-ui`) 
-respectively.
 - download GraphDB Free ZIP and place it into the `graphdb` folder.
-- set `services.graphdb.build.args.version` to the respective GraphDB version, e.g. 9.3.3
+- set `services.termit-db-server.build.args.GRAPHDB_ZIP` to the respective GraphDB distribution file, e.g. `graphdb-free-9.6.0-dist.zip`
+- set `services.termit.image` to the respective docker image of TermIt frontend
+- set `services.termit-server.image` to the respective docker image of TermIt backend
+- adjust `ROOT` in .env to reflect the local context prefix the app will be running on
+- adjust `URL` in .env to reflect the server the app will be running on
 
-To build docker images, execute `docker-compose build`
-Then, to run the whole TermIt platform, execute `docker-compose up` 
+To run TermIt, execute `docker-compose up` 
