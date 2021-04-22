@@ -47,8 +47,12 @@ services:
       - termit-server
     image: termit
     environment:
-      REACT_APP_SERVER_URL: ${URL}${ROOT}/sluzby/server
       SERVER_URL: ${URL}${ROOT}/sluzby/server
+      ADMIN_REGISTRATION_ONLY: "true"
+      SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
+      GOOGLE_LOGIN: "false"
+      GITHUB_LOGIN: "false"
+      DEPLOYMENT:
     ports:
       - "3000:80"
 volumes:
