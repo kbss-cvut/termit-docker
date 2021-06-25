@@ -33,11 +33,11 @@ services:
       - termit-db-server
     image: termit-server
     environment:
-      REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
-      REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
-      SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
-      FILE_STORAGE: /tmp/storage
-      TEXTANALYSIS_URL: https://localhost/annotate?enableKeywordExtraction=true # TODO parameterize
+      TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
+      TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
+      TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
+      TERMIT_FILE_STORAGE: /tmp/storage
+      TERMIT_TEXTANALYSIS_URL: https://localhost/annotate?enableKeywordExtraction=true # TODO parameterize
     ports:
       - "8080:8080"
     volumes:
