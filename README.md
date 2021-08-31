@@ -2,6 +2,7 @@
 TermIt docker serves to spin off a TermIt deployment, consisting of :
 - GraphDB (database)
 - TermIt (backend)
+- Annotace (backend)
 - TermIt UI (frontend)
 
 ## Prerequisities

@@ -37,11 +37,17 @@ services:
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
       TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       TERMIT_FILE_STORAGE: /tmp/storage
-      TERMIT_TEXTANALYSIS_URL: https://localhost/annotate?enableKeywordExtraction=true # TODO parameterize
+      TERMIT_TEXTANALYSIS_URL: http://annotace-server:8888/annotate?enableKeywordExtraction=true
     ports:
       - "8080:8080"
     volumes:
       - termit-server:/tmp
+  annotace-server:
+    image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
+    ports:
+      - "8888:8080"
+    volumes:
+      - annotace-server:/tmp
   termit:
     depends_on:
       - termit-server
@@ -58,3 +64,4 @@ services:
 volumes:
   termit-db-server:
   termit-server:
+  annotace-server:
