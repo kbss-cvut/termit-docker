@@ -18,7 +18,7 @@ services:
     build:
       context: db-server
       args:
-        GRAPHDB_ZIP: graphdb-free-9.6.0-dist.zip
+        GRAPHDB_ZIP: $GRAPHDB_FILE
     image: termit-db-server
     environment:
       GDB_JAVA_OPTS: >-
@@ -29,6 +29,8 @@ services:
     volumes:
       - termit-db-server:/graphdb/home
   termit-server:
+    build:
+      context: termit-server
     depends_on:
       - termit-db-server
     image: termit-server
@@ -43,12 +45,16 @@ services:
     volumes:
       - termit-server:/tmp
   annotace-server:
-    image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
+    build:
+      context: annotace-server
+    image: annotace-server
     ports:
       - "8888:8080"
     volumes:
       - annotace-server:/tmp
   termit:
+    build:
+      context: termit
     depends_on:
       - termit-server
     image: termit
