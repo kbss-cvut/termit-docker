@@ -11,16 +11,19 @@ Third, You need to have docker images of [termit](https://github.com/kbss-cvut/t
 
 ## Running TermIt
 1. Download [GraphDB](https://www.ontotext.com) (Free, SE, EE) standalone server ZIP archive and place it into the 'db-server' folder. TermIt can be successfully run with GraphDB Free 9.10.1, but other versions should be usable as well.
-2. Set `GRAPHDB_FILE` variable in `.env to the name of the file You just downloaded.
-3. Clone [TermIt server](https://github.com/kbss-cvut/termit) as a new subfolder `termit-server`, i.e.
-   
-   `git clone https://github.com/kbss-cvut/termit termit-server`
-4. Clone [TermIt UI](https://github.com/kbss-cvut/termit-ui) as a new subfolder `termit`, i.e.
-   
-   `git clone https://github.com/kbss-cvut/termit-ui termit`
-5. Clone [Annotace](https://github.com/kbss-cvut/annotace) (`termit` branch) as a new subfolder `annotace-server`, i.e.
+2. Set `GRAPHDB_FILE` variable in `.env` to the name of the file You just downloaded.
+3. Clone [Annotace](https://github.com/kbss-cvut/annotace) (`termit` branch) as a new subfolder `annotace-server`, i.e.
    
    `git clone https://github.com/kbss-cvut/annotace annotace-server --branch termit`
+
+Alternatively, a prebuilt Docker image for Annotace is available. In order to use it and avoid cloning Annotace, remove the `services.annotace-server.build` section and set `services.annotace-server.image` to `ghcr.io/kbss-cvut/annotace/annotace-spark:latest` in `docker-compose.yml`. Similarly, if you have previously built images for `termit-server` (step 4 below) and `termit-ui` (step 5 below), you can use them in a similar way.
+4. Clone [TermIt server](https://github.com/kbss-cvut/termit) as a new subfolder `termit-server`, i.e.
+   
+   `git clone https://github.com/kbss-cvut/termit termit-server`
+5. Clone [TermIt UI](https://github.com/kbss-cvut/termit-ui) as a new subfolder `termit`, i.e.
+   
+   `git clone https://github.com/kbss-cvut/termit-ui termit`
+   
 6. Set `ROOT` variable in .env to reflect the local context prefix the app will be running on.
 7. Set `URL` variable in .env to reflect the server the app will be running on.
 8. Start the GraphDB server
