@@ -40,6 +40,7 @@ services:
       TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       TERMIT_FILE_STORAGE: /tmp/storage
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8888/annotate?enableKeywordExtraction=true
+      TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
     ports:
       - "8080:8080"
     volumes:

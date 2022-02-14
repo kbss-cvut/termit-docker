@@ -16,7 +16,8 @@ Third, You need to have docker images of [termit](https://github.com/kbss-cvut/t
    
    `git clone https://github.com/kbss-cvut/annotace annotace-server --branch termit`
 
-Alternatively, a prebuilt Docker image for Annotace is available. In order to use it and avoid cloning Annotace, remove the `services.annotace-server.build` section and set `services.annotace-server.image` to `ghcr.io/kbss-cvut/annotace/annotace-spark:latest` in `docker-compose.yml`. Similarly, if you have previously built images for `termit-server` (step 4 below) and `termit-ui` (step 5 below), you can use them in a similar way.
+   Alternatively, a prebuilt Docker image for Annotace is available. In order to use it and avoid cloning Annotace, remove the `services.annotace-server.build` section and set `services.annotace-server.image` to `ghcr.io/kbss-cvut/annotace/annotace-spark:latest` in `docker-compose.yml`. Similarly, if you have previously built images for `termit-server` (step 4 below) and `termit-ui` (step 5 below), you can use them in a similar way.
+
 4. Clone [TermIt server](https://github.com/kbss-cvut/termit) as a new subfolder `termit-server`, i.e.
    
    `git clone https://github.com/kbss-cvut/termit termit-server`
@@ -26,11 +27,12 @@ Alternatively, a prebuilt Docker image for Annotace is available. In order to us
    
 6. Set `ROOT` variable in .env to reflect the local context prefix the app will be running on.
 7. Set `URL` variable in .env to reflect the server the app will be running on.
-8. Start the GraphDB server
+8. (Optional, but **highly recommended**) Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
+9. Start the GraphDB server
    `docker-compose up -d termit-db-server`
-9. Go to `http://localhost:7200/import#server` and upload all the "Server files" into the context `http://onto.fel.cvut.cz/ontologies/termit`
-   in the `termit` repository.
-10. Go to `http://localhost:7200/sparql` and execute all the queries in the `db-server/lucene` directory to create lucene connectors for full-text search.
-11. Run the remaining services by
+10. Go to `http://localhost:7200/import#server` and upload all the "Server files" into the context `http://onto.fel.cvut.cz/ontologies/termit`
+    in the `termit` repository.
+11. Go to `http://localhost:7200/sparql` and execute all the queries in the `db-server/lucene` directory to create lucene connectors for full-text search.
+12. Run the remaining services by
     `docker-compose up -d`
-12. Look for the admin password to the `termit-server` log and use it for first login at the configured URL, e.g. `http://localhost/termit`.
+13. Look for the admin password to the `termit-server` log and use it for first login at the configured URL, e.g. `http://localhost/termit`.
