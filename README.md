@@ -30,8 +30,7 @@ Third, You need to have docker images of [termit](https://github.com/kbss-cvut/t
 8. Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
 9. Start the GraphDB server
    `docker-compose up -d termit-db-server`
-10. Go to `http://localhost:7200/import#server` and upload all the "Server files" into the context `http://onto.fel.cvut.cz/ontologies/termit`
-    in the `termit` repository.
+10. Go to `http://localhost:7200/import#server`, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
 11. Go to `http://localhost:7200/sparql` and execute all the queries in the `db-server/lucene` directory to create lucene connectors for full-text search.
 12. Run the remaining services by
     `docker-compose up -d`
