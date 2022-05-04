@@ -27,7 +27,7 @@ Third, You need to have docker images of [termit](https://github.com/kbss-cvut/t
    
 6. Set `ROOT` variable in .env to reflect the local context prefix the app will be running on.
 7. Set `URL` variable in .env to reflect the server the app will be running on.
-8. (Optional, but **highly recommended**) Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
+8. Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
 9. Start the GraphDB server
    `docker-compose up -d termit-db-server`
 10. Go to `http://localhost:7200/import#server` and upload all the "Server files" into the context `http://onto.fel.cvut.cz/ontologies/termit`
