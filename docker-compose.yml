@@ -21,20 +21,18 @@ services:
         GRAPHDB_ZIP: $GRAPHDB_FILE
     image: termit-db-server
     environment:
-      GDB_JAVA_OPTS: >-
-        -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server
+      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864
     restart: always
     ports:
       - "7200:7200"
     volumes:
       - termit-db-server:/graphdb/home
   termit-server:
-    build:
-      context: termit-server
+    image: kbsscvut/termit:dev
     depends_on:
       - termit-db-server
-    image: termit-server
     environment:
+      LOGGING_FILE_NAME: /tmp/storage/termit.log
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
       TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
@@ -44,18 +42,15 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - termit-server:/tmp
+      - termit-server:/tmp/storage
   annotace-server:
-    build:
-      context: annotace-server
-    image: annotace-server
+    image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
     ports:
       - "8888:8080"
     volumes:
       - annotace-server:/tmp
   termit:
-    build:
-      context: termit
+    image: kbsscvut/termit-ui:dev
     depends_on:
       - termit-server
     image: termit
@@ -63,9 +58,6 @@ services:
       SERVER_URL: ${URL}${ROOT}/sluzby/server
       ADMIN_REGISTRATION_ONLY: "true"
       SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
-      GOOGLE_LOGIN: "false"
-      GITHUB_LOGIN: "false"
-      DEPLOYMENT:
     ports:
       - "3000:80"
 volumes:
