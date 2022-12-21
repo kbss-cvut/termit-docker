@@ -8,7 +8,7 @@ Prefices
     pdp  :  http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/pojem/
     psys :  http://proton.semanticweb.org/protonsys#
     termit : http://onto.fel.cvut.cz/ontologies/application/termit/pojem/
-    activity: https://www.w3.org/ns/activitystreams#
+    activity: http://www.w3.org/ns/activitystreams#
 }
 
 Axioms
@@ -91,6 +91,20 @@ Rules
     -------------------------------
     this <termit:má-zdroj-definice-termu> source
 
+  Id: pdp_term_9
+
+      this <rdf:type> <skos:Concept>
+      this <skos:related> related
+      -------------------------------
+      related <skos:related> this
+
+  Id: pdp_term_10
+
+        this <rdf:type> <skos:Concept>
+        this <skos:relatedMatch> related
+        -------------------------------
+        related <skos:relatedMatch> this
+
   Id: sioc_comment_1
 
       source <rdf:type> <termit:reakce>
@@ -98,14 +112,23 @@ Rules
       -------------------------------
       this <termit:má-reakci> source
 
-  Id: pdp_slovnik_1
+  Id: skos_exact_match_symmetry
 
-      term <rdf:type> <skos:Concept>
-      term <pdp:je-pojmem-ze-slovníku> this
-      term <skos:broader> parent
-      parent <rdf:type> <skos:Concept>
-      parent <pdp:je-pojmem-ze-slovníku> target     [Constraint target != this] [Cut]
+      source <skos:exactMatch> this
       -------------------------------
-      this <termit:používá-pojmy-ze-slovníku> target
-}
+      this <skos:exactMatch> source
 
+  Id: skos_exact_match_transitivity
+
+      x <skos:exactMatch>    y           [Constraint x != y, x != z, y != z]
+      y <skos:exactMatch>    z
+      -------------------------------
+      x <skos:exactMatch>    z
+
+  Id: skos_broad_match_inverse
+
+    this <rdf:type> <skos:Concept>
+    this <skos:broadMatch> parent
+    -------------------------------
+    parent <skos:narrowMatch> this
+}
