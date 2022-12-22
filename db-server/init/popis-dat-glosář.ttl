@@ -1,0 +1,955 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix a-popis-dat-pojem: <http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/pojem/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix a-popis-dat: <http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/> .
+
+a-popis-dat-pojem:je-pojmem
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-záznamem , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is term of"@en , "Je pojmem"@cs .
+
+a-popis-dat-pojem:číselník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:databázová-tabulka , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Codelist"@en , "Číselník"@cs .
+
+a-popis-dat-pojem:má-heslo
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vlastnost> , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has password"@en , "Má heslo"@cs .
+
+a-popis-dat-pojem:má-posledního-editora
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-editora , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Má posledního editora\", \"Has last editor"@en .
+
+a-popis-dat-pojem:má-datový-typ
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has data type"@en , "Má datový typ"@cs .
+
+a-popis-dat:glosář  a   <http://www.w3.org/2004/02/skos/core#ConceptScheme> , a-popis-dat-pojem:glosář , owl:Ontology ;
+        rdfs:label      "Vocabulary for data description - glossary"@en , "Slovník popis dat - glosář"@cs ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "Michal Med" ;
+        <http://purl.org/dc/elements/1.1/rights>
+                <https://creativecommons.org/licenses/by/4.0/> ;
+        <http://purl.org/dc/elements/1.1/title>
+                "Vocabulary for data description - glossary"@en , "Slovník popis dat - glosář"@cs ;
+        <http://purl.org/dc/terms/created>
+                "13.11.2019" ;
+        <http://purl.org/ontology/bibo/status>
+                "Specifikace"@cs , "Specification"@en ;
+        <http://purl.org/vocab/vann/preferredNamespacePrefix>
+                "a-popis-dat-pojem" ;
+        <http://purl.org/vocab/vann/preferredNamespaceUri>
+                "http://onto.fel.cvut.cz/ontologies/slovnik/agendovy/popis-dat/pojem/" ;
+        owl:imports     <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/1.0.0> ;
+        owl:versionIRI  <http://onto.fel.cvut.cz/ontologies/slovnik/agendovy/popis-dat/glosář/verze/1.0.7> .
+
+a-popis-dat-pojem:záznam
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://www.w3.org/2004/02/skos/core#Concept> , <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Record"@en , "Záznam"@cs .
+
+a-popis-dat-pojem:je-záznamem-datové-sady
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-záznamem , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is record of data set"@en , "Je záznamem datové sady"@cs .
+
+a-popis-dat-pojem:legislativní-slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:dokumentový-slovník , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Legislative vocabulary"@en , "Legislativní slovník"@cs .
+
+a-popis-dat-pojem:poskytuje-záznam
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Provides record"@en , "Poskytuje záznam"@cs .
+
+a-popis-dat-pojem:statistický-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:atribut-záznamu , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Statistic attribute of record"@en , "Statistický atribut záznamu"@cs .
+
+a-popis-dat-pojem:funkce
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/trope> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Function"@en , "Funkce"@cs .
+
+a-popis-dat-pojem:má-dokumentový-slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has document vocabulary"@en , "Má dokumentový slovník"@cs .
+
+a-popis-dat-pojem:má-atribut
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has attribute"@en , "Má atribut"@cs .
+
+a-popis-dat-pojem:soubor
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:zdroj , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "File"@en , "Soubor"@cs .
+
+a-popis-dat-pojem:je-datovým-atributem-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-atributem-záznamu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is data attribute of record"@en , "Je datovým atributem záznamu"@cs .
+
+a-popis-dat-pojem:zdroj
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Resource"@en , "Zdroj"@cs .
+
+a-popis-dat-pojem:má-referenční-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-atribut-záznamu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has reference attribute of record"@en , "Má referenční atribut záznamu"@cs .
+
+a-popis-dat-pojem:je-referenčním-atributem-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-atributem-záznamu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is reference attribute of record"@en , "Je referenčním atributem záznamu"@cs .
+
+a-popis-dat-pojem:má-atribut-databázové-tabulky
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-atribut , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has data set attribute"@en , "Má atribut databázové tabulky"@cs .
+
+a-popis-dat-pojem:dokument
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:zdroj , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Document"@en , "Dokument"@cs .
+
+a-popis-dat-pojem:má-číselníkovou-hodnotu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-atribut-databázové-tabulky , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has codelist value"@en , "Má číselníkovou hodnotu"@cs .
+
+a-popis-dat-pojem:term
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:záznam , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Term"@en , "Term"@cs .
+
+a-popis-dat-pojem:je-pojmem-ze-slovníku
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-pojmem , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is term from vocabulary"@en , "Je pojmem ze slovníku"@cs .
+
+a-popis-dat-pojem:dokumentový-slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:slovník , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Document vocabulary"@en , "Dokumentový slovník"@cs .
+
+a-popis-dat-pojem:má-datum-a-čas-poslední-modifikace
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-datum-a-čas-modifikace , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has date and time of last modification"@en , "Má datum a čas poslední modifikace"@cs .
+
+a-popis-dat-pojem:je-záznamem
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is record of"@en , "Je záznamem"@cs .
+
+a-popis-dat-pojem:datový-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:atribut-záznamu , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Data attribute of record"@en , "Datový atribut záznamu"@cs .
+
+a-popis-dat-pojem:atribut
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/objekt> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Attribute"@en , "Atribut"@cs .
+
+a-popis-dat-pojem:zdroj-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:zdroj-dat , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Source of record"@en , "Zdroj záznamu"@cs .
+
+a-popis-dat-pojem:databázová-tabulka-jako-zdroj-dat
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:dotaz-sql-databáze , a-popis-dat-pojem:databázová-tabulka , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Database table as a data source"@en , "Databázová tabulka jako zdroj dat"@cs .
+
+a-popis-dat-pojem:má-příjmení
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vlastnost> , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has surname"@en , "Má příjmení"@cs .
+
+a-popis-dat-pojem:má-model
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/has-part> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has model"@en , "Má model"@cs .
+
+a-popis-dat-pojem:je-v-kontextu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is in context"@en , "Je v kontextu"@cs .
+
+a-popis-dat-pojem:má-datum-a-čas-modifikace
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vlastnost> , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has date and time of modification"@en , "Má datum a čas modifikace"@cs .
+
+a-popis-dat-pojem:je-statistickým-atributem-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-atributem-záznamu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is statistic attribute of record"@en , "Je statistickým atributem záznamu"@cs .
+
+a-popis-dat-pojem:má-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-atribut , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has attribute of record"@en , "Má atribut záznamu"@cs .
+
+a-popis-dat-pojem:datový-slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:slovník , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Data vocabulary"@en , "Datový slovník"@cs .
+
+a-popis-dat-pojem:má-statistický-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-atribut-záznamu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has statistic attribute of record"@en , "Má statistický atribut záznamu"@cs .
+
+a-popis-dat-pojem:má-hodnotu-z-číselníku
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has codelist value"@en , "Má hodnotu z číselníku"@cs .
+
+a-popis-dat-pojem:referenční-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:atribut-záznamu , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Reference attribute of record"@en , "Referenční atribut záznamu"@cs .
+
+a-popis-dat-pojem:definuje-funkci
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Defines function"@en , "Definuje funkci"@cs .
+
+a-popis-dat-pojem:je-v-kontextu-datové-sady
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-v-kontextu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is in context of data set"@en , "Je v kontextu datové sady"@cs .
+
+a-popis-dat-pojem:dokument-legislativní-povahy
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:dokument , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Document of legislative nature"@en , "Dokument legislativní povahy"@cs .
+
+a-popis-dat-pojem:atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:term , a-popis-dat-pojem:atribut , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Attribute of record"@en , "Atribut záznamu"@cs .
+
+a-popis-dat-pojem:číselníková-hodnota
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:atribut-databázové-tabulky , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Codelist value"@en , "Číselníková hodnota"@cs .
+
+a-popis-dat-pojem:je-atributem-databázové-tabulky
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-atributem , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is attribute of database table"@en , "Je atributem databázové tabulky"@cs .
+
+a-popis-dat-pojem:dotaz-sql-databáze
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:zdroj-dat , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "SQL database query"@en , "Dotaz SQL databáze"@cs .
+
+a-popis-dat-pojem:má-autora
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-editora , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has author"@en , " Má autora"@cs .
+
+a-popis-dat-pojem:má-editora
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has editor"@en , "Má editora"@cs .
+
+a-popis-dat-pojem:importuje-slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Imports vocabulary"@en , "Importuje slovník"@cs .
+
+a-popis-dat-pojem:má-glosář
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/has-part> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has glossary"@en , "Má glosář"@cs .
+
+a-popis-dat-pojem:poskytuje-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Provides attribute of record"@en , "Poskytuje atribut záznamu"@cs .
+
+a-popis-dat-pojem:zdroj-datové-sady
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/dataset-source> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Data set source"@en , "Zdroj datové sady"@cs .
+
+a-popis-dat-pojem:model
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Model"@en , "Model"@cs .
+
+<http://www.w3.org/2004/02/skos/core#prefLabel>
+        rdfs:subPropertyOf  rdfs:label .
+
+a-popis-dat-pojem:databáze
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:zdroj , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Database"@en , "Databáze"@cs .
+
+a-popis-dat-pojem:je-atributem
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is attribute of"@en , "Je atributem"@cs .
+
+a-popis-dat-pojem:atribut-databázové-tabulky
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:atribut , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Attribute of database table"@en , "Atribut databázové tabulky"@cs .
+
+a-popis-dat-pojem:geometrický-atribut
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:atribut , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Geometry attribute"@en , "Geometrický atribut"@cs .
+
+a-popis-dat-pojem:katalogizuje-datovou-sadu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Catalogues data set"@en , "Katalogizuje datovou sadu"@cs .
+
+a-popis-dat-pojem:obsahuje-kořenový-pojem
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://www.w3.org/2004/02/skos/core#hasTopConcept> , a-popis-dat-pojem:obsahuje-pojem , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Contains root term"@en , "Obsahuje kořenový pojem"@cs .
+
+a-popis-dat-pojem:obsahuje-pojem
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Contains term"@en , "Obsahuje pojem"@cs .
+
+a-popis-dat-pojem:má-soubor
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has file"@en , "Má soubor"@cs .
+
+a-popis-dat-pojem:datová-sada
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/dataset> , a-popis-dat-pojem:zdroj , a-popis-dat-pojem:kontext , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Data set"@en , "Datová sada"@cs .
+
+a-popis-dat-pojem:poskytuje-datovou-sadu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/offers-dataset> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Provides data set"@en , "Poskytuje datovou sadu"@cs .
+
+a-popis-dat-pojem:glosář
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://www.w3.org/2004/02/skos/core#ConceptScheme> , <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Glossary"@en , "Glosář"@cs .
+
+a-popis-dat-pojem:diagram
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://www.w3.org/2004/02/skos/core#ConceptScheme> , <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Diagram"@en , "Diagram"@cs .
+
+a-popis-dat-pojem:je-částí-dokumentu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is part of document"@en , "Je částí dokumentu"@cs .
+
+a-popis-dat-pojem:má-křestní-jméno
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vlastnost> , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has first name"@en , "Má křestní jméno"@cs .
+
+a-popis-dat-pojem:je-atributem-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-atributem , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is attribute of record"@en , "Je atributem záznamu"@cs .
+
+a-popis-dat-pojem:slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:datová-sada , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Vocabulary"@en , "Slovník"@cs .
+
+a-popis-dat-pojem:má-datový-atribut-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-atribut-záznamu , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has data attribute of record"@en , "Má datový atribut záznamu"@cs .
+
+a-popis-dat-pojem:katalog
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:datová-sada , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Catalogue"@en , "Katalog"@cs .
+
+a-popis-dat-pojem:popisuje-legislativní-dokument
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:popisuje-dokument , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Describes legislative document"@en , "Popisuje legislativní dokument"@cs .
+
+a-popis-dat-pojem:popisuje-dokument
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Describes document"@en , "Popisuje dokument"@cs .
+
+a-popis-dat-pojem:uživatel
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/person> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "User"@en , "Uživatel"@cs .
+
+a-popis-dat-pojem:zdroj-dat
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Data source"@en , "Zdroj dat"@cs .
+
+a-popis-dat-pojem:má-zdroj
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has resource"@en , "Má zdroj"@cs .
+
+a-popis-dat-pojem:má-uživatelské-jméno
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vlastnost> , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has username"@en , "Má uživatelské jméno"@cs .
+
+a-popis-dat-pojem:databázová-tabulka
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Database table"@en , "Databázová tabulka"@cs .
+
+a-popis-dat-pojem:zdroj-atributu-záznamu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:zdroj-dat , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Source of attribute of record"@en , "Zdroj atributu záznamu"@cs .
+
+a-popis-dat-pojem:agendový-slovník
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:slovník , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Agendový slovník"@cs .
+
+a-popis-dat-pojem:kontext
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <http://onto.fel.cvut.cz/ontologies/ufo/pojem/endurant> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Context"@en , "Kontext"@cs .
+
+a-popis-dat-pojem:má-datum-a-čas-vytvoření
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-datum-a-čas-modifikace , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has date and time of creation"@en , "Má datum a čas vytvoření"@cs .
+
+a-popis-dat-pojem:změna
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/typ-události> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Change"@en , "Změna"@cs .
+
+a-popis-dat-pojem:vytvoření-entity
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:změna , <https://slovník.gov.cz/základní/pojem/typ-události> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Creation of entity"@en , "Vytvoření entity"@cs .
+
+a-popis-dat-pojem:úprava-entity
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:změna , <https://slovník.gov.cz/základní/pojem/typ-události> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                  "Adjustment of entity"@en , "Úprava entity"@cs .
+
+a-popis-dat-pojem:má-změněnou-entitu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has changed entity"@en , "Má změněnou entitu"@cs .
+
+a-popis-dat-pojem:má-změněný-atribut
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has changed attribute"@en , "Má změněný atribut"@cs .
+
+a-popis-dat-pojem:má-novou-hodnotu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has new value"@en , "Má novou hodnotu"@cs .
+
+a-popis-dat-pojem:má-původní-hodnotu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has original value"@en , "Má původní hodnotu"@cs .
+
+a-popis-dat-pojem:verze-objektu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+              <http://onto.fel.cvut.cz/ontologies/ufo/pojem/endurant> , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+              a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+              "Version of object"@en , "Verze objektu"@cs .
+
+a-popis-dat-pojem:verze-slovníku
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+              a-popis-dat-pojem:verze-objektu , a-popis-dat-pojem:slovník , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+              a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+              "Version of vocabulary"@en , "Verze slovníku"@cs .
+
+a-popis-dat-pojem:verze-modelu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+              a-popis-dat-pojem:verze-objektu , a-popis-dat-pojem:model , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+              a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+              "Version of model"@en , "Verze modelu"@cs .
+
+a-popis-dat-pojem:verze-glosáře
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+              a-popis-dat-pojem:verze-objektu , a-popis-dat-pojem:glosář , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+              a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+              "Version of glossary"@en , "Verze glosáře"@cs .
+
+a-popis-dat-pojem:verze-pojmu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+              a-popis-dat-pojem:verze-objektu , a-popis-dat-pojem:term , <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+              a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+              "Version of term"@en , "Verze pojmu"@cs .
+
+a-popis-dat-pojem:je-verzí
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is version of"@en , "Je verzí"@cs .
+
+a-popis-dat-pojem:je-verzí-slovníku
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-verzí , <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is version of vocabulary"@en , "Je verzí slovníku"@cs .
+
+a-popis-dat-pojem:je-verzí-modelu
+      a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+      <http://www.w3.org/2004/02/skos/core#broader>
+              a-popis-dat-pojem:je-verzí , <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+      <http://www.w3.org/2004/02/skos/core#inScheme>
+              a-popis-dat:glosář ;
+      <http://www.w3.org/2004/02/skos/core#prefLabel>
+              "Is version of model"@en , "Je verzí modelu"@cs .
+
+a-popis-dat-pojem:je-verzí-glosáře
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-verzí , <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is version of glossary"@en , "Je verzí glosáře"@cs .
+
+a-popis-dat-pojem:je-verzí-pojmu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:je-verzí , <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Is version of term"@en , "Je verzí pojmu"@cs .
+
+a-popis-dat-pojem:má-verzi-glosáře
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-glosář , <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has glossary version"@en , "Má verzi glosáře"@cs .
+
+a-popis-dat-pojem:má-verzi-modelu
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-model , <https://slovník.gov.cz/základní/pojem/vztah> , <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has model version"@en , "Má verzi modelu"@cs .
+
+a-popis-dat-pojem:má-datum-a-čas-vytvoření-verze
+        a       <http://www.w3.org/2004/02/skos/core#Concept> ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                a-popis-dat-pojem:má-datum-a-čas-modifikace , <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                a-popis-dat:glosář ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has date and time of version creation"@en , "Má datum a čas vytvoření verze"@cs .

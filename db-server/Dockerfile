@@ -23,9 +23,6 @@ ADD rulesets /rulesets
 
 ADD init /root/graphdb-import
 
-RUN rm -rf ${GRAPHDB_HOME}/data
-
-COPY data ${GRAPHDB_HOME}/data
 COPY conf ${GRAPHDB_HOME}/conf
 
 CMD ["-Dgraphdb.home=/graphdb/home","-Dgraphdb.logback=conf/logback.xml"]
