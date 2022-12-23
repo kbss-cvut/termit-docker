@@ -1,4 +1,7 @@
-FROM openjdk:11
+FROM eclipse-temurin:11-jdk-alpine
+
+# Add curl
+RUN apk --no-cache add curl
 
 ARG GRAPHDB_ZIP
 
@@ -19,9 +22,11 @@ RUN export GRAPHDB_DIR=`ls -d graphdb*/` && mv $GRAPHDB_DIR/* $GRAPHDB_INSTALL_D
 
 ENV PATH=${GRAPHDB_INSTALL_DIR}/bin:$PATH
 
-ADD rulesets /rulesets
+COPY rulesets ${GRAPHDB_HOME}/rulesets
 
-ADD init /root/graphdb-import
+COPY init-data /root/graphdb-import
+COPY init-config /termit-repo-config
+COPY repo-init.sh ${GRAPHDB_INSTALL_DIR}/repo-init.sh
 
 COPY conf ${GRAPHDB_HOME}/conf
 
