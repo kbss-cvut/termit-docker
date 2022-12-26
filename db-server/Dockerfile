@@ -1,5 +1,7 @@
 FROM eclipse-temurin:11-jdk-alpine
 
+# Add bash, it is required by GraphDB run script
+RUN apk --no-cache add bash
 # Add curl
 RUN apk --no-cache add curl
 
@@ -30,6 +32,7 @@ COPY repo-init.sh ${GRAPHDB_INSTALL_DIR}/repo-init.sh
 
 COPY conf ${GRAPHDB_HOME}/conf
 
-CMD ["-Dgraphdb.home=/graphdb/home","-Dgraphdb.logback=conf/logback.xml"]
-ENTRYPOINT ["/graphdb/dist/bin/graphdb"]
 EXPOSE 7200
+
+CMD ${GRAPHDB_INSTALL_DIR}/repo-init.sh /termit-repo-config ${GRAPHDB_HOME} & ${GRAPHDB_INSTALL_DIR}/bin/graphdb -Dgraphdb.home=${GRAPHDB_HOME} -Dgraphdb.logback=conf/logback.xml
+

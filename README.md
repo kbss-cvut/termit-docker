@@ -19,8 +19,7 @@ TermIt docker serves to spin off a TermIt deployment, consisting of :
 6. Start the GraphDB server
    `docker-compose up -d termit-db-server`
 7. Go to `http://localhost:7200/import#server`, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
-8. Go to `http://localhost:7200/sparql` and execute all the queries in the `db-server/lucene` directory to create lucene connectors for full-text search.
-9. Run the remaining services by
+8. Run the remaining services by
     `docker-compose up -d`
-10. Look for the admin password to the `termit-server` log and use it for first login at the configured URL, e.g. `http://localhost/termit`.
+9. Look for the admin password to the `termit-server` log and use it for first login at the configured URL, e.g. `http://localhost/termit`.
 

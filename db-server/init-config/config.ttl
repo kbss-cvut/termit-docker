@@ -25,7 +25,7 @@
           <http://www.ontotext.com/trree/owlim#query-timeout> "0";
           <http://www.ontotext.com/trree/owlim#read-only> "false";
           <http://www.ontotext.com/trree/owlim#repository-type> "file-repository";
-          <http://www.ontotext.com/trree/owlim#ruleset> "rulesets/rules-termit-graphdb.pie";
+          <http://www.ontotext.com/trree/owlim#ruleset> "/graphdb/home/rulesets/rules-termit-graphdb.pie";
           <http://www.ontotext.com/trree/owlim#storage-folder> "storage";
           <http://www.ontotext.com/trree/owlim#throw-QueryEvaluationException-on-timeout> "false";
           sail:sailType "graphdb:FreeSail"
