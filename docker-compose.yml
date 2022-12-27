@@ -28,7 +28,7 @@ services:
     volumes:
       - termit-db-server:/graphdb/home
   termit-server:
-    image: kbsscvut/termit:dev
+    image: kbsscvut/termit
     depends_on:
       - termit-db-server
     environment:
@@ -50,10 +50,9 @@ services:
     volumes:
       - annotace-server:/tmp
   termit:
-    image: kbsscvut/termit-ui:dev
+    image: kbsscvut/termit-ui
     depends_on:
       - termit-server
-    image: termit
     environment:
       SERVER_URL: ${URL}${ROOT}/sluzby/server
       ADMIN_REGISTRATION_ONLY: "true"
