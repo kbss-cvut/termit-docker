@@ -1,13 +1,14 @@
-# TermIt docker
-TermIt docker serves to spin off a TermIt deployment, consisting of :
-- GraphDB (database)
-- TermIt (backend)
-- Annotace (backend)
-- TermIt UI (frontend)
+# TermIt Docker
+TermIt Docker serves to spin off a TermIt deployment, consisting of:
+
+- [GraphDB](https://www.ontotext.com/products/graphdb/) (database)
+- [TermIt](https://github.com/kbss-cvut/termit) (backend)
+- [Annotace](https://github.com/kbss-cvut/annotace) (backend)
+- [TermIt UI](https://github.com/kbss-cvut/termit-ui) (frontend)
 
 ## Prerequisities
 1. You should have Docker & Docker Compose installed (and accessible under current user).
-2. You need to have [GraphDB](https://www.ontotext.com) (Free, SE, EE) ZIP file downloaded. Note that TermIt requires GraphDB *8.x* or *9.x*, it will **not** work with GraphDB *10.x*.
+2. You need to have [GraphDB](https://www.ontotext.com) (Free, SE, EE) ZIP file downloaded. Note that TermIt requires GraphDB *8.x* or *9.x*, it currently does **not** work with GraphDB *10.x*.
 
 
 ## Running TermIt
@@ -23,4 +24,23 @@ TermIt docker serves to spin off a TermIt deployment, consisting of :
 9. Run the remaining services by
     `docker-compose up -d`
 10. Look for the admin password to the `termit-server` log and use it for first login at the configured URL, e.g. `http://localhost/termit`.
+
+## Configuration
+
+TermIt is highly configurable both in terms of the content as well as the way it runs. This section provides details on the most important configuration options.
+
+### Language
+
+The default configuration assumes TermIt is run for Czech vocabularies. To use TermIt in other environments, the following changes are needed:
+
+#### TermIt
+
+TermIt backend stores and loads strings based on the configured language. To change it, set the `TERMIT_PERSISTENCE_LANGUAGE` value in 'docker-compose.yml' to the appropriate language tag (e.g., en, de).
+
+#### Full Text Search
+
+Full text search (FTS) is implemented via Lucene connectors in the underlying GraphDB repository. These connectors are language-specific, so to use a different language for TermIt and FTS working correctly, the Lucene connectors need to be configured accordingly. To use a different language that Czech, set the following in the connector-creating SPARQL queries in 'db-server/lucene':
+
+- Set the value of the "languages" attribute to the appropriate language tag
+- Set the value of the "analyzer" attribute to the appropriate fully qualified Lucene analyzer class name. See, for example, https://lucene.apache.org/core/4_0_0/analyzers-common/overview-summary.html.
 
