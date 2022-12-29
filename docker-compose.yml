@@ -35,6 +35,7 @@ services:
       LOGGING_FILE_NAME: /tmp/storage/termit.log
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
+      TERMIT_CORS_ALLOWEDORIGINS: ${URL}
       TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       TERMIT_FILE_STORAGE: /tmp/storage
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8888/annotate?enableKeywordExtraction=true
