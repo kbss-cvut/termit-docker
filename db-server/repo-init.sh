@@ -19,9 +19,6 @@ if [ ! -d ${GRAPHDB_HOME}/data/repositories/${REPO_NAME} ] || [ -z "$(ls -A ${GR
     # Create repository based on configuration
     echo "Creating TermIt repository..."
     curl -X POST --header "Content-Type: multipart/form-data" -F "config=@${SOURCE_DIR}/config.ttl" "http://localhost:7200/rest/repositories"
-    echo "Creating Lucene indexes for the TermIt repository..."
-    curl -X POST --data-urlencode "update@${SOURCE_DIR}/create-label-index.rq" "http://localhost:7200/repositories/${REPO_NAME}/statements"
-    curl -X POST --data-urlencode "update@${SOURCE_DIR}/create-defcom-index.rq" "http://localhost:7200/repositories/${REPO_NAME}/statements"
     echo "TermIt repository successfully initialized."
 else
     echo "TermIt repository already exists. Skipping initialization..."
