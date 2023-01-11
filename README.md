@@ -16,7 +16,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 2. Set `GRAPHDB_FILE` variable in `.env` to the name of the file you just downloaded. 
 3. (_Optional_) Set `ROOT` variable in .env to reflect the local context prefix the app will be running on.
 4. (_Optional_) Set `URL` variable in .env to reflect the server the app will be running on.
-5. ((_Optional_, recommended) Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
+5. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
 6. Start the GraphDB server
    `docker-compose up -d termit-db-server`
 7. Go to `http://localhost:7200/import#server`, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
