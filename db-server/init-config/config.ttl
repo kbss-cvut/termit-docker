@@ -2,11 +2,12 @@
 @prefix rep: <http://www.openrdf.org/config/repository#> .
 @prefix sail: <http://www.openrdf.org/config/sail#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix graphdb: <http://www.ontotext.com/config/graphdb#>.
 
 <#termit> a rep:Repository;
   rep:repositoryID "termit";
   rep:repositoryImpl [
-      rep:repositoryType "owlim:MonitorRepository";
+      rep:repositoryType "graphdb:FreeSailRepository";
       <http://www.openrdf.org/config/repository/sail#sailImpl> [
           <http://www.ontotext.com/trree/owlim#base-URL> "http://example.org/owlim#";
           <http://www.ontotext.com/trree/owlim#check-for-inconsistencies> "false";
@@ -24,10 +25,10 @@
           <http://www.ontotext.com/trree/owlim#query-timeout> "0";
           <http://www.ontotext.com/trree/owlim#read-only> "false";
           <http://www.ontotext.com/trree/owlim#repository-type> "file-repository";
-          <http://www.ontotext.com/trree/owlim#ruleset> "empty";
+          <http://www.ontotext.com/trree/owlim#ruleset> "/graphdb/home/rulesets/rules-termit-graphdb.pie";
           <http://www.ontotext.com/trree/owlim#storage-folder> "storage";
           <http://www.ontotext.com/trree/owlim#throw-QueryEvaluationException-on-timeout> "false";
-          sail:sailType "owlim:Sail"
+          sail:sailType "graphdb:FreeSail"
         ]
     ];
   rdfs:label "TermIt Repository" .

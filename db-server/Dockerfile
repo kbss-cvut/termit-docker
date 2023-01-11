@@ -1,4 +1,9 @@
-FROM openjdk:11
+FROM eclipse-temurin:11-jdk-alpine
+
+# Add bash, it is required by GraphDB run script
+RUN apk --no-cache add bash
+# Add curl
+RUN apk --no-cache add curl
 
 ARG GRAPHDB_ZIP
 
@@ -19,15 +24,15 @@ RUN export GRAPHDB_DIR=`ls -d graphdb*/` && mv $GRAPHDB_DIR/* $GRAPHDB_INSTALL_D
 
 ENV PATH=${GRAPHDB_INSTALL_DIR}/bin:$PATH
 
-ADD rulesets /rulesets
+COPY rulesets ${GRAPHDB_HOME}/rulesets
 
-ADD init /root/graphdb-import
+COPY init-data /root/graphdb-import
+COPY init-config /termit-repo-config
+COPY repo-init.sh ${GRAPHDB_INSTALL_DIR}/repo-init.sh
 
-RUN rm -rf ${GRAPHDB_HOME}/data
-
-COPY data ${GRAPHDB_HOME}/data
 COPY conf ${GRAPHDB_HOME}/conf
 
-CMD ["-Dgraphdb.home=/graphdb/home","-Dgraphdb.logback=conf/logback.xml"]
-ENTRYPOINT ["/graphdb/dist/bin/graphdb"]
 EXPOSE 7200
+
+CMD ${GRAPHDB_INSTALL_DIR}/repo-init.sh /termit-repo-config ${GRAPHDB_HOME} & ${GRAPHDB_INSTALL_DIR}/bin/graphdb -Dgraphdb.home=${GRAPHDB_HOME} -Dgraphdb.logback=conf/logback.xml
+
