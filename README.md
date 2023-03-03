@@ -8,7 +8,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 
 ## Prerequisities
 1. You should have Docker & Docker Compose installed (and accessible under current user).
-2. You need to have [GraphDB](https://www.ontotext.com) (Free, SE, EE) ZIP file downloaded. Note that TermIt requires GraphDB *8.x* or *9.x*, it currently does **not** work with GraphDB *10.x*.
+2. You need to have [GraphDB](https://www.ontotext.com) (Free, SE, EE) ZIP file downloaded (8.x or later).
 
 
 ## Running TermIt
