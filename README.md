@@ -7,8 +7,17 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - [TermIt UI](https://github.com/kbss-cvut/termit-ui) (frontend)
 
 ## Prerequisities
-1. You should have Docker & Docker Compose installed (and accessible under current user).
-2. You need to have [GraphDB](https://www.ontotext.com) (Free, SE, EE) ZIP file downloaded (8.x or later).
+1. Docker 19.03.0 or later & Docker Compose installed (and accessible under the current user).
+2. [GraphDB](https://www.ontotext.com) (Free, SE, EE) ZIP file downloaded (8.x or later).
+
+### Resource Requirements
+
+- TermIt: at least 512MB RAM (1GB and more is optimal), 1 CPU
+- TermIt UI: 100MB RAM is more than enough
+- GraphDB: at least 2 GB RAM (depending on the amount of data stored), 1 CPU
+- Annotace: at least 512MB RAM
+
+Ideally, the whole deployment should have at least 4GB RAM available, with at least 2-3 CPU cores.
 
 
 ## Running TermIt
