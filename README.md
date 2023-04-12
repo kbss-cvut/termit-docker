@@ -30,7 +30,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 7. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene connectors for full-text search.
 8. Run the remaining services by
     `docker-compose up -d`
-9. Look for admin credentials in the `termit-server` log and use them for first login at the configured URL, e.g. `http://localhost/termit`.
+9. Look for admin credentials in the `termit-server` log and use them for first login at the configured URL, e.g. http://localhost/termit.
 
 ## Configuration
 
@@ -46,14 +46,14 @@ TermIt backend stores and loads strings based on the configured language. To cha
 
 #### Full Text Search
 
-Full text search (FTS) is implemented via Lucene connectors in the underlying GraphDB repository. These connectors are language-specific, so to use a different language for TermIt and FTS working correctly, the Lucene connectors need to be configured accordingly. To use a different language that Czech, set the following in the connector-creating SPARQL queries in 'db-server/lucene':
+Full text search (FTS) is implemented via Lucene connectors in the underlying GraphDB repository. These connectors are language-specific, so to use a different language for TermIt and FTS working correctly, the Lucene connectors need to be configured accordingly. To use a different language that Czech, set the following in the connector-creating SPARQL queries in `db-server/lucene`:
 
 - Set the value of the "languages" attribute to the appropriate language tag
 - Set the value of the "analyzer" attribute to the appropriate fully qualified Lucene analyzer class name. See, for example, https://lucene.apache.org/core/4_0_0/analyzers-common/overview-summary.html.
 
 ### Further TermIt Configuration
 
-As stated above, TermIt is highly configurable. The following table lists the names of environment variables that can be passed to TermIt backend either directly in 'docker-compose.yml', in an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_file), or via command line.
+As stated above, TermIt is highly configurable. The following table lists the names of environment variables that can be passed to TermIt backend either directly in `docker-compose.yml`, in an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_file), or via command line.
 
 | Variable | Explanation |
 | :------- | :---------- |
