@@ -7,13 +7,13 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - [TermIt UI](https://github.com/kbss-cvut/termit-ui) (frontend)
 
 ## Prerequisities
-1. Docker 19.03.0 or later & Docker Compose installed (and accessible under the current user).
+- Docker 19.03.0 or later & Docker Compose installed (and accessible under the current user).
 
 ### Resource Requirements
 
 - TermIt: at least 512MB RAM (1GB and more is optimal), 1 CPU
 - TermIt UI: 100MB RAM is more than enough
-- GraphDB: at least 2 GB RAM (depending on the amount of data stored), 1 CPU
+- GraphDB: at least 2GB RAM (depending on the amount of data stored), 1 CPU
 - Annotace: at least 512MB RAM
 
 Ideally, the whole deployment should have at least 4GB RAM available, with at least 2-3 CPU cores.
@@ -21,13 +21,13 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 
 ## Running TermIt
 1. (_Optional_) If you have a license file for GraphDB (SE or EE), place it in the `db-server/license` directory.
-2. (_Optional_) Set `ROOT` variable in .env to reflect the local context prefix the app will be running on.
-3. (_Optional_) Set `URL` variable in .env to reflect the server the app will be running on.
-4. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in .env. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
+2. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
+3. (_Optional_) Set `URL` variable in `.env` to reflect the server the app will be running on.
+4. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
 5. Start the GraphDB server
    `docker-compose up -d termit-db-server`
-6. Go to `http://localhost:7200/import#server`, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
-7. Go to `http://localhost:7200/sparql` and execute all the queries in the 'db-server/lucene' directory to create Lucene connectors for full-text search.
+6. Go to http://localhost:7200/import#server, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
+7. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene connectors for full-text search.
 8. Run the remaining services by
     `docker-compose up -d`
 9. Look for admin credentials in the `termit-server` log and use them for first login at the configured URL, e.g. `http://localhost/termit`.
@@ -42,7 +42,7 @@ The default configuration assumes TermIt is run for Czech vocabularies. To use T
 
 #### TermIt
 
-TermIt backend stores and loads strings based on the configured language. To change it, set the `TERMIT_PERSISTENCE_LANGUAGE` value in 'docker-compose.yml' to the appropriate language tag (e.g., en, de).
+TermIt backend stores and loads strings based on the configured language. To change it, set the `TERMIT_PERSISTENCE_LANGUAGE` value in `docker-compose.yml` to the appropriate language tag (e.g., en, de).
 
 #### Full Text Search
 
