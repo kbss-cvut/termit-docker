@@ -17,8 +17,6 @@ services:
   termit-db-server:
     build:
       context: db-server
-      args:
-        GRAPHDB_ZIP: $GRAPHDB_FILE
     image: termit-db-server
     environment:
       GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864
@@ -26,7 +24,7 @@ services:
     ports:
       - "7200:7200"
     volumes:
-      - termit-db-server:/graphdb/home
+      - termit-db-server:/opt/graphdb/home
   termit-server:
     image: kbsscvut/termit
     depends_on:

@@ -1,38 +1,24 @@
-FROM eclipse-temurin:11-jdk-alpine
+FROM ontotext/graphdb:10.2.0
 
-# Add bash, it is required by GraphDB run script
-RUN apk --no-cache add bash
-# Add curl
-RUN apk --no-cache add curl
+# Override parent entrypoint
+ENTRYPOINT []
 
-ARG GRAPHDB_ZIP
+ENV GRAPHDB_HOME=/opt/graphdb/home
+ENV GRAPHDB_INSTALL_DIR=/opt/graphdb/dist
 
-RUN \
-    # Check for mandatory build arguments
-    : "${GRAPHDB_ZIP:?Provide the downloaded GraphDB Free ZIP file}"
+WORKDIR ${GRAPHDB_HOME}
+# Copy license file if it exists
+COPY ./license/. ${GRAPHDB_HOME}/conf/
 
-ENV GRAPHDB_VOLUME=/graphdb
-ENV GRAPHDB_HOME=${GRAPHDB_VOLUME}/home
-ENV GRAPHDB_INSTALL_DIR=${GRAPHDB_VOLUME}/dist
-RUN mkdir -p $GRAPHDB_VOLUME $GRAPHDB_INSTALL_DIR $GRAPHDB_HOME
+# Copy our custom ruleset
+COPY rulesets rulesets
 
-ADD $GRAPHDB_ZIP /tmp/$GRAPHDB_ZIP
-
-WORKDIR /tmp
-RUN unzip $GRAPHDB_ZIP
-RUN export GRAPHDB_DIR=`ls -d graphdb*/` && mv $GRAPHDB_DIR/* $GRAPHDB_INSTALL_DIR
-
-ENV PATH=${GRAPHDB_INSTALL_DIR}/bin:$PATH
-
-COPY rulesets ${GRAPHDB_HOME}/rulesets
-
+# Copy initialization data and repository config
 COPY init-data /root/graphdb-import
 COPY init-config /termit-repo-config
 COPY repo-init.sh ${GRAPHDB_INSTALL_DIR}/repo-init.sh
 
-COPY conf ${GRAPHDB_HOME}/conf
-
 EXPOSE 7200
 
-CMD ${GRAPHDB_INSTALL_DIR}/repo-init.sh /termit-repo-config ${GRAPHDB_HOME} & ${GRAPHDB_INSTALL_DIR}/bin/graphdb -Dgraphdb.home=${GRAPHDB_HOME} -Dgraphdb.logback=conf/logback.xml
+CMD ${GRAPHDB_INSTALL_DIR}/repo-init.sh /termit-repo-config ${GRAPHDB_HOME} & ${GRAPHDB_INSTALL_DIR}/bin/graphdb -Dgraphdb.home=${GRAPHDB_HOME} -Dgraphdb.logback=${GRAPHDB_INSTALL_DIR}/conf/logback.xml
 
