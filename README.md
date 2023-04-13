@@ -30,7 +30,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 7. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene connectors for full-text search.
 8. Run the remaining services by
     `docker-compose up -d`
-9. Look for admin credentials in the `termit-server` log and use them for first login at the configured URL, e.g. http://localhost/termit.
+9. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL, e.g. http://localhost/termit.
 
 ## Configuration
 
