@@ -9,25 +9,25 @@
   rep:repositoryImpl [
       rep:repositoryType "graphdb:SailRepository";
       <http://www.openrdf.org/config/repository/sail#sailImpl> [
-          <http://www.ontotext.com/trree/owlim#base-URL> "http://example.org/owlim#";
-          <http://www.ontotext.com/trree/owlim#check-for-inconsistencies> "false";
-          <http://www.ontotext.com/trree/owlim#defaultNS> "";
-          <http://www.ontotext.com/trree/owlim#disable-sameAs> "true";
-          <http://www.ontotext.com/trree/owlim#enable-context-index> "true";
-          <http://www.ontotext.com/trree/owlim#enable-literal-index> "true";
-          <http://www.ontotext.com/trree/owlim#enablePredicateList> "true";
-          <http://www.ontotext.com/trree/owlim#entity-id-size> "32";
-          <http://www.ontotext.com/trree/owlim#entity-index-size> "10000000";
-          <http://www.ontotext.com/trree/owlim#imports> "";
-          <http://www.ontotext.com/trree/owlim#in-memory-literal-properties> "true";
-          <http://www.ontotext.com/trree/owlim#owlim-license> "";
-          <http://www.ontotext.com/trree/owlim#query-limit-results> "0";
-          <http://www.ontotext.com/trree/owlim#query-timeout> "0";
-          <http://www.ontotext.com/trree/owlim#read-only> "false";
-          <http://www.ontotext.com/trree/owlim#repository-type> "file-repository";
-          <http://www.ontotext.com/trree/owlim#ruleset> "/graphdb/home/rulesets/rules-termit-graphdb.pie";
-          <http://www.ontotext.com/trree/owlim#storage-folder> "storage";
-          <http://www.ontotext.com/trree/owlim#throw-QueryEvaluationException-on-timeout> "false";
+          graphdb:base-URL "http://example.org/owlim#";
+          graphdb:check-for-inconsistencies "false";
+          graphdb:defaultNS "";
+          graphdb:disable-sameAs "true";
+          graphdb:enable-context-index "true";
+          graphdb:enable-literal-index "true";
+          graphdb:enablePredicateList "true";
+          graphdb:entity-id-size "32";
+          graphdb:entity-index-size "10000000";
+          graphdb:imports "";
+          graphdb:in-memory-literal-properties "true";
+          graphdb:owlim-license "";
+          graphdb:query-limit-results "0";
+          graphdb:query-timeout "0";
+          graphdb:read-only "false";
+          graphdb:repository-type "file-repository";
+          graphdb:ruleset "/opt/graphdb/home/rulesets/rules-termit-graphdb.pie";
+          graphdb:storage-folder "storage";
+          graphdb:throw-QueryEvaluationException-on-timeout "false";
           sail:sailType "graphdb:Sail"
         ]
     ];
