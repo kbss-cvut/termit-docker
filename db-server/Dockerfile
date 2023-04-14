@@ -7,8 +7,6 @@ ENV GRAPHDB_HOME=/opt/graphdb/home
 ENV GRAPHDB_INSTALL_DIR=/opt/graphdb/dist
 
 WORKDIR ${GRAPHDB_HOME}
-# Copy license file if it exists
-COPY ./license/. ${GRAPHDB_HOME}/conf/
 
 # Copy our custom ruleset
 COPY rulesets rulesets

@@ -20,12 +20,12 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 
 
 ## Running TermIt
-1. (_Optional_) If you have a license file for GraphDB (SE or EE), place it in the `db-server/license` directory.
-2. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
-3. (_Optional_) Set `URL` variable in `.env` to reflect the server the app will be running on.
-4. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
-5. Start the GraphDB server
+1. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
+2. (_Optional_) Set `URL` variable in `.env` to reflect the server the app will be running on.
+3. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
+4. Start the GraphDB server
    `docker-compose up -d termit-db-server`
+5. (_Optional_) If you have a license for GraphDB, go to http://localhost:7200/license/register and upload the license file.
 6. Go to http://localhost:7200/import#server, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
 7. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene connectors for full-text search.
 8. Run the remaining services by
