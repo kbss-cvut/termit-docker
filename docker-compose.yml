@@ -22,7 +22,7 @@ services:
       GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864
     restart: always
     ports:
-      - "7200:7200"
+      - "127.0.0.1:7200:7200"
     volumes:
       - termit-db-server:/opt/graphdb/home
   termit-server:
@@ -40,13 +40,13 @@ services:
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     volumes:
       - termit-server:/tmp/storage
   annotace-server:
     image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
     ports:
-      - "8888:8080"
+      - "127.0.0.1:8888:8080"
     volumes:
       - annotace-server:/tmp
   termit:
@@ -58,7 +58,7 @@ services:
       ADMIN_REGISTRATION_ONLY: "true"
       SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
     ports:
-      - "3000:80"
+      - "127.0.0.1:3000:80"
 volumes:
   termit-db-server:
   termit-server:
