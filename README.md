@@ -5,6 +5,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - [TermIt](https://github.com/kbss-cvut/termit) (backend)
 - [Annotace](https://github.com/kbss-cvut/annotace)
 - [TermIt UI](https://github.com/kbss-cvut/termit-ui) (frontend)
+- [OntoGrapher](todo)todo
 
 ## Prerequisities
 - Docker 19.03.0 or later & Docker Compose installed (and accessible under the current user).
@@ -15,6 +16,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - TermIt UI: 100MB RAM is more than enough
 - GraphDB: at least 2GB RAM (depending on the amount of data stored), 1 CPU
 - Annotace: at least 512MB RAM
+- OntoGrapher: todo
 
 Ideally, the whole deployment should have at least 4GB RAM available, with at least 2-3 CPU cores.
 
@@ -82,4 +84,5 @@ As stated above, TermIt is highly configurable. The following table lists the na
 
 The parameters are based on the [Configuration](https://github.com/kbss-cvut/termit/blob/master/src/main/java/cz/cvut/kbss/termit/util/Configuration.java) class in TermIt backend. If you need to further adjust the behavior of TermIt, consult this class.
 
-
+### OntoGrapher configuration
+ToDo

@@ -19,7 +19,7 @@ services:
       context: db-server
     image: termit-db-server
     environment:
-      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864
+      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
     restart: always
     ports:
       - "127.0.0.1:7200:7200"
@@ -59,6 +59,23 @@ services:
       SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
     ports:
       - "127.0.0.1:3000:80"
+  ontographer:
+    build:
+      context: ./ontographer/
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_CONTEXT=$REACT_APP_CONTEXT
+        - REACT_APP_ID=$REACT_APP_ID
+        - REACT_APP_URL=$REACT_APP_URL
+        - REACT_APP_COMPONENTS=$REACT_APP_COMPONENTS
+        - REACT_APP_DEBUG=$REACT_APP_DEBUG
+        - REACT_APP_AUTHENTICATION=$REACT_APP_AUTHENTICATION
+        - REACT_APP_STANDALONE=$REACT_APP_STANDALONE
+    ports:
+      - 8079:80
+    env_file:
+      - .env
+
 volumes:
   termit-db-server:
   termit-server:
