@@ -1,4 +1,4 @@
-FROM node:18 as node
+FROM node:19-alpine as node
 
 ARG PUBLIC_PATH=.
 ENV PUBLIC_URL=$PUBLIC_PATH
@@ -24,5 +24,5 @@ COPY . .
 RUN npx eslint --ext .ts,.tsx ./src/
 RUN npm run build
 
-FROM nginx:latest
+FROM nginx:1.25
 COPY --from=node /ontographer/build /usr/share/nginx/html
