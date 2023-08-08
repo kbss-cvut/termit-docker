@@ -72,7 +72,7 @@ services:
         - REACT_APP_AUTHENTICATION=$ONTOGRAPHER_AUTHENTICATION
         - REACT_APP_STANDALONE=$ONTOGRAPHER_STANDALONE
     ports:
-      - 8079:80
+      - "127.0.0.1:8079:80"
     env_file:
       - .env
 
