@@ -11,22 +11,65 @@ services:
       - 443:443
     restart: always
     depends_on:
+      - auth-server
       - termit
       - termit-server
       - termit-db-server
+      - ontographer
+  auth-server-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    restart: always
+    volumes:
+      - auth-server-db:/var/lib/postgresql/data
+  auth-server:
+    image: ghcr.io/kbss-cvut/keycloak-graphdb-user-replicator/keycloak-graphdb:latest
+    command:
+      - start
+    environment:
+      KC_HOSTNAME_URL: ${URL}/auth
+      KC_HOSTNAME_ADMIN_URL: ${URL}/auth/
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_PROXY: edge
+      KC_HTTP_ENABLED: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: passy
+      DB_VENDOR: POSTGRES
+      DB_ADDR: auth-server-db
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_SCHEMA: public
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_SERVER_URL: http://termit-db-server:7200
+      DB_SERVER_REPOSITORY_ID: termit
+      DB_SERVER_CONTEXT: http://onto.fel.cvut.cz/ontologies/application/termit/users
+      USER_TYPE: http://onto.fel.cvut.cz/ontologies/application/termit/pojem/uživatel-termitu
+      REALM_ID: termit
+    restart: always
+    ports:
+      - "127.0.0.1:8088:8080"
+    volumes:
+      - auth-server:/opt/keycloak/data
+    depends_on:
+      - auth-server-db
   termit-db-server:
     build:
       context: db-server
     image: termit-db-server
+    depends_on:
+        - auth-server
     environment:
-      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
+      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Dgraphdb.auth.methods=openid -Dgraphdb.auth.openid.issuer=${URL}/auth/realms/termit -Dgraphdb.auth.openid.client_id=${GDB_CLIENTID} -Dgraphdb.auth.openid.username_claim=preferred_username -Dgraphdb.auth.openid.auth_flow=code -Dgraphdb.auth.openid.token_type=access -Dgraphdb.auth.openid.proxy=true -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
     restart: always
     ports:
       - "127.0.0.1:7200:7200"
     volumes:
       - termit-db-server:/opt/graphdb/home
   termit-server:
-    image: kbsscvut/termit
+    image: kbsscvut/termit:dev
     depends_on:
       - termit-db-server
     environment:
@@ -39,8 +82,12 @@ services:
       TERMIT_FILE_STORAGE: /tmp/storage
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
+      TERMIT_SECURITY_PROVIDER: oidc
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}/auth/realms/termit
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
     ports:
       - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8000:8000"
     volumes:
       - termit-server:/tmp/storage
   annotace-server:
@@ -50,13 +97,16 @@ services:
     volumes:
       - annotace-server:/tmp
   termit:
-    image: kbsscvut/termit-ui
+    image: kbsscvut/termit-ui:dev
     depends_on:
       - termit-server
     environment:
       SERVER_URL: ${URL}${ROOT}/sluzby/server
       ADMIN_REGISTRATION_ONLY: "true"
       SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
+      AUTHENTICATION: oidc
+      AUTH_SERVER_URL: ${URL}/auth/realms/termit
+      AUTH_CLIENT_ID: termit-ui
     ports:
       - "127.0.0.1:3000:80"
   ontographer:
@@ -77,6 +127,8 @@ services:
       - .env
 
 volumes:
+  auth-server-db:
+  auth-server:
   termit-db-server:
   termit-server:
   annotace-server:
