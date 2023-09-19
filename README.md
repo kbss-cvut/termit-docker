@@ -17,6 +17,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - GraphDB: at least 2GB RAM (depending on the amount of data stored), 1 CPU
 - Annotace: at least 512MB RAM
 - OntoGrapher: same as TermIt UI
+- Keycloak + Postgres: (1CPU and approx. 512MB RAM)
 
 Ideally, the whole deployment should have at least 4GB RAM available, with at least 2-3 CPU cores.
 
@@ -86,3 +87,18 @@ The parameters are based on the [Configuration](https://github.com/kbss-cvut/ter
 
 <!-- ### OntoGrapher configuration
 ToDo -->
+
+### Keycloak
+
+When using Keycloak as an authentication service behind a proxy, it is necessary to:
+- Set `KC_HOSTNAME_URL` and `KC_HOSTNAME_ADMIN_URL` to the public URL at which Keycloak will be accessible to the outside world (proxied)
+- Set `KC_HOSTNAME_STRICT_BACKCHANNEL` and `KC_PROXY` so that other services can use it via its Docker service URL
+- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI` in TermIt to the **public URL** of TermIt. This URL is used to validate the authentication token
+- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI` in TermIt to the **Docker service URL** of Keycloak. This URL is used by TermIt to access the authentication service itself
+- Both `TermIt UI` and `OntoGrapher` use the **public URL** of Keycloak
+- It is necessary to create a realm (called `termit` by default) with clients for:
+  - termit - with enabled client authentication (confidential access)
+  - termit-ui - with disabled client authentication (public access)
+  - ontographer - with disabled client authentication (public access)
+  - graphdb - with enabled client authentication (confidential access)
+- It is also necessary to add the `keycloak-graphdb-user-replicator` to event listeners in Realm settings. This replicates user metadata to the TermIt repository and also creates accounts in GraphDB (needed by OntoGrapher)

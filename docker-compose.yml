@@ -62,7 +62,7 @@ services:
     depends_on:
         - auth-server
     environment:
-      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Dgraphdb.auth.methods=openid -Dgraphdb.auth.openid.issuer=${URL}/auth/realms/termit -Dgraphdb.auth.openid.client_id=${GDB_CLIENTID} -Dgraphdb.auth.openid.username_claim=preferred_username -Dgraphdb.auth.openid.auth_flow=code -Dgraphdb.auth.openid.token_type=access -Dgraphdb.auth.openid.proxy=true -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
+      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
     restart: always
     ports:
       - "127.0.0.1:7200:7200"
