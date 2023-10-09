@@ -30,13 +30,14 @@ services:
     command:
       - start
     environment:
-      KC_HOSTNAME_URL: ${URL}/auth
-      KC_HOSTNAME_ADMIN_URL: ${URL}/auth/
-      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_IMPORT: /tmp/import/react-export.json
+      KC_HOSTNAME_URL: ${URL}${ROOT}/sluzby/auth
+      KC_HOSTNAME_ADMIN_URL: ${URL}${ROOT}/sluzby/auth/
+      KC_HOSTNAME_STRICT_BACKCHANNEL: true
       KC_PROXY: edge
       KC_HTTP_ENABLED: true
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: passy
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       DB_VENDOR: POSTGRES
       DB_ADDR: auth-server-db
       DB_DATABASE: ${POSTGRES_DB}
@@ -53,6 +54,7 @@ services:
       - "127.0.0.1:8088:8080"
     volumes:
       - auth-server:/opt/keycloak/data
+      - ./keycloak:/opt/keycloak/data/import
     depends_on:
       - auth-server-db
   termit-db-server:
@@ -62,7 +64,7 @@ services:
     depends_on:
         - auth-server
     environment:
-      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
+      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Dgraphdb.auth.database=oauth -Dgraphdb.auth.oauth.roles_claim=realm_access.roles -Dgraphdb.auth.oauth.roles_prefix=GDB_ -Dgraphdb.auth.oauth.default_roles=ROLE_USER -Dgraphdb.auth.methods=openid -Dgraphdb.auth.openid.issuer=${URL}${ROOT}/sluzby/auth/realms/termit -Dgraphdb.auth.openid.client_id=graphdb -Dgraphdb.auth.openid.username_claim=preferred_username -Dgraphdb.auth.openid.auth_flow=code -Dgraphdb.auth.openid.token_type=access -Ddefault.min.distinct.threshold=67108864 -Dgraphdb.workbench.cors.enable=true -Dgraphdb.workbench.cors.origin=* -Dgraphdb.workbench.cors.expose-headers=*
     restart: always
     ports:
       - "127.0.0.1:7200:7200"
@@ -78,12 +80,11 @@ services:
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
       TERMIT_CORS_ALLOWEDORIGINS: ${URL}
-      TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       TERMIT_FILE_STORAGE: /tmp/storage
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
       TERMIT_SECURITY_PROVIDER: oidc
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}/auth/realms/termit
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}${ROOT}/sluzby/auth/realms/termit
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
     ports:
       - "127.0.0.1:8080:8080"
@@ -101,11 +102,11 @@ services:
     depends_on:
       - termit-server
     environment:
-      SERVER_URL: ${URL}${ROOT}/sluzby/server
+      SERVER_URL: ${URL}${ROOT}/sluzby/termit-server
       ADMIN_REGISTRATION_ONLY: "true"
       SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
       AUTHENTICATION: oidc
-      AUTH_SERVER_URL: ${URL}/auth/realms/termit
+      AUTH_SERVER_URL: ${URL}${ROOT}/sluzby/auth/realms/termit
       AUTH_CLIENT_ID: termit-ui
     ports:
       - "127.0.0.1:3000:80"
@@ -116,7 +117,7 @@ services:
       args:
         - REACT_APP_CONTEXT=$ONTOGRAPHER_CONTEXT
         - REACT_APP_ID=$ONTOGRAPHER_ID
-        - REACT_APP_URL=$ONTOGRAPHER_URL
+        - REACT_APP_URL=${URL}${ROOT}/ontographer
         - REACT_APP_COMPONENTS=$ONTOGRAPHER_COMPONENTS
         - REACT_APP_DEBUG=$ONTOGRAPHER_DEBUG
         - REACT_APP_AUTHENTICATION=$ONTOGRAPHER_AUTHENTICATION

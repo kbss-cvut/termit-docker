@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:alpine3.18
 ARG CONTEXT=/termit
 WORKDIR /etc/nginx/
 COPY nginx.conf .
