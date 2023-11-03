@@ -64,33 +64,6 @@
         "attributes": {}
       },
       {
-        "id": "56b261d3-d7be-4075-b079-ccf19c6f0cb3",
-        "name": "GDB_ROLE_USER",
-        "description": "",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "50150ff9-e1a0-41c9-9017-e76bdf295b8a",
-        "attributes": {}
-      },
-      {
-        "id": "843bc220-bbca-469b-ba1b-a0b73971414d",
-        "name": "GDB_READ_REPO_*",
-        "description": "",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "50150ff9-e1a0-41c9-9017-e76bdf295b8a",
-        "attributes": {}
-      },
-      {
-        "id": "5ca52fd8-5158-466c-ab16-3bf96f002acf",
-        "name": "GDB_WRITE_REPO_*",
-        "description": "",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "50150ff9-e1a0-41c9-9017-e76bdf295b8a",
-        "attributes": {}
-      },
-      {
         "id": "8b24931c-824e-48c8-8ea5-17565ad42681",
         "name": "default-roles-termit",
         "description": "${role_default-roles}",
@@ -101,24 +74,6 @@
             "uma_authorization"
           ]
         },
-        "clientRole": false,
-        "containerId": "50150ff9-e1a0-41c9-9017-e76bdf295b8a",
-        "attributes": {}
-      },
-      {
-        "id": "56a64db9-d2a4-4ab5-99b9-b8009b6b7c70",
-        "name": "GDB_ROLE_ADMIN",
-        "description": "",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "50150ff9-e1a0-41c9-9017-e76bdf295b8a",
-        "attributes": {}
-      },
-      {
-        "id": "fd1ecc65-61a4-4216-9e68-6f38ea4530ed",
-        "name": "GDB_ROLE_REPO_MANAGER",
-        "description": "",
-        "composite": false,
         "clientRole": false,
         "containerId": "50150ff9-e1a0-41c9-9017-e76bdf295b8a",
         "attributes": {}
@@ -1334,7 +1289,8 @@
   "smtpServer": {},
   "eventsEnabled": false,
   "eventsListeners": [
-    "jboss-logging"
+    "jboss-logging",
+    "keycloak-graphdb-user-replicator"
   ],
   "enabledEventTypes": [],
   "adminEventsEnabled": false,

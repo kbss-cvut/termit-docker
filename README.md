@@ -6,6 +6,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - [Annotace](https://github.com/kbss-cvut/annotace)
 - [TermIt UI](https://github.com/kbss-cvut/termit-ui) (frontend)
 - [OntoGrapher](https://github.com/datagov-cz/ontoGrapher/tree/standalone) (standalone branch)
+- [Keycloak](https://www.keycloak.org/)
 
 ## Prerequisities
 - Docker 23.0.1 or later & Docker Compose installed (and accessible under the current user).
@@ -25,15 +26,17 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 ## Running TermIt
 1. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
 2. (_Optional_) Set `URL` variable in `.env` to reflect the server the app will be running on.
-3. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters that will be used to hash the JWT authentication token for logged-in users.
-4. Start the GraphDB server
+3. (_Optional_) Set `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` in `.env` to a custom value.
+3. Start the GraphDB server
    `docker-compose up -d termit-db-server`
-5. (_Optional_) If you have a license for GraphDB, go to http://localhost:7200/license/register and upload the license file.
-6. Go to http://localhost:7200/import#server, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI to `http://onto.fel.cvut.cz/ontologies/termit`.
-7. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene connectors for full-text search.
+4. (_Optional_) If you have a license for GraphDB, go to http://localhost:7200/license/register and upload the license file.
+5. Go to http://localhost:7200/import#server, select the "termit" repository, and in the "Server files" section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI and Target graph to `http://onto.fel.cvut.cz/ontologies/termit`.
+6. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene connectors for full-text search.
+7. (_Optional_, recommended) Go to Setup/Users and access and enable security. Create a new user that TermIt and other related services will use to access the `termit` repository. Give the new user write access to the `termit` repository. Set the new user's username and password as `GDB_USERNAME` a `GDB_PASSWORD` in `.env` so that all relevant applications can access the repository.
 8. Run the remaining services by
     `docker-compose up -d`
-9. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL, e.g. http://localhost/termit (OntoGrapher is then available at http://localhost/ontographer).
+9. Go to `${URL}/${ROOT}/sluzby/auth` (http://localhost/termit/sluzby/auth by default) and log into the Keycloak administration console using the `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` values. Switch to realm `termit` and register new users. Assign the new users roles (use one of `ROLE_ADMIN`, `ROLE_FULL_USER` or `ROLE_RESTRICTED_USER` for each user).
+10. TermIt is now available at `${URL}/${ROOT}` (http://localhost/termit by default), OntoGrapher at `${URL}/${ROOT}/ontographer` (http://localhost/termit/ontographer by default).
 
 ## Configuration
 
@@ -85,20 +88,16 @@ As stated above, TermIt is highly configurable. The following table lists the na
 
 The parameters are based on the [Configuration](https://github.com/kbss-cvut/termit/blob/master/src/main/java/cz/cvut/kbss/termit/util/Configuration.java) class in TermIt backend. If you need to further adjust the behavior of TermIt, consult this class.
 
-<!-- ### OntoGrapher configuration
-ToDo -->
+### OntoGrapher
+
+OntoGrapher is configured to use the same authentication service (Keycloak) as TermIt. It is also configured with adresses of other relevant services via the `ONTOGRAPHER_COMPONENTS` variable. If any changes are made to the paths/URLs of these services, it is necessary to update the `ONTOGRAPHER_COMPONENTS` value accordingly and rebuild the OntoGrapher image. The `ONTOGRAPHER_COMPONENTS` is a base 64-encoded JSON string, so it is necessary to decode it, make changes, and then encode it again.
 
 ### Keycloak
 
 When using Keycloak as an authentication service behind a proxy, it is necessary to:
 - Set `KC_HOSTNAME_URL` and `KC_HOSTNAME_ADMIN_URL` to the public URL at which Keycloak will be accessible to the outside world (proxied)
 - Set `KC_HOSTNAME_STRICT_BACKCHANNEL` and `KC_PROXY` so that other services can use it via its Docker service URL
-- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI` in TermIt to the **public URL** of TermIt. This URL is used to validate the authentication token
-- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI` in TermIt to the **Docker service URL** of Keycloak. This URL is used by TermIt to access the authentication service itself
+- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI` in TermIt (and db-server-proxy) to the **public URL** of TermIt. This URL is used to validate the authentication token
+- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI` in TermIt (and db-server-proxy) to the **Docker service URL** of Keycloak. This URL is used by TermIt to access the authentication service itself
 - Both `TermIt UI` and `OntoGrapher` use the **public URL** of Keycloak
-- It is necessary to create a realm (called `termit` by default) with clients for:
-  - termit - with enabled client authentication (confidential access)
-  - termit-ui - with disabled client authentication (public access)
-  - ontographer - with disabled client authentication (public access)
-  - graphdb - with enabled client authentication (confidential access)
-- It is also necessary to add the `keycloak-graphdb-user-replicator` to event listeners in Realm settings. This replicates user metadata to the TermIt repository and also creates accounts in GraphDB (needed by OntoGrapher)
+- Keycloak is configured to automatically import the pre-configured `termit` realm

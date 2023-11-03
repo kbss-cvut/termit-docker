@@ -30,7 +30,7 @@ services:
   auth-server:
     image: ghcr.io/kbss-cvut/keycloak-graphdb-user-replicator/keycloak-graphdb:latest
     command:
-      - start
+      - start --import-realm
     environment:
       KC_IMPORT: realm-export.json
       KC_HOSTNAME_URL: ${URL}${ROOT}/sluzby/auth
@@ -90,10 +90,10 @@ services:
       TERMIT_FILE_STORAGE: /tmp/storage
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_LANGUAGE_TYPES_SOURCE: /tmp/z-sgov-glosář.ttl
-      TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
       TERMIT_SECURITY_PROVIDER: oidc
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}${ROOT}/sluzby/auth/realms/termit
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
+      SPRING_PROFILES_ACTIVE: lucene, no-cache
     ports:
       - "127.0.0.1:8080:8080"
       - "127.0.0.1:8000:8000"
