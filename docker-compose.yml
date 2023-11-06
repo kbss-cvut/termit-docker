@@ -10,9 +10,11 @@ services:
       - termit
       - termit-server
       - termit-db-server
-  environment:
+    environment:
       NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx
       ROOT: ${ROOT}
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/templates/nginx.conf.template
   termit-db-server:
     build:
       context: db-server
