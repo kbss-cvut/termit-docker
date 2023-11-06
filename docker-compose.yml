@@ -130,6 +130,8 @@ services:
       AUTHENTICATION: oidc
       AUTH_SERVER_URL: ${URL}${ROOT}/sluzby/auth/realms/termit
       AUTH_CLIENT_ID: termit-ui
+      AUTH_SERVER_MANAGEMENT: ${URL}${ROOT}/sluzby/auth/admin/termit/console/
+      AUTH_SERVER_USER_PROFILE: ${URL}${ROOT}/sluzby/auth/realms/termit/account/
     ports:
       - "127.0.0.1:3000:80"
   ontographer:
