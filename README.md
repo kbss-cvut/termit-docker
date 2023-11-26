@@ -37,6 +37,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
     `docker-compose up -d`
 9. Go to `${URL}/${ROOT}/sluzby/auth` (http://localhost/termit/sluzby/auth by default) and log into the Keycloak administration console using the `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` values. Switch to realm `termit` and register new users. Assign the new users roles (use one of `ROLE_ADMIN`, `ROLE_FULL_USER` or `ROLE_RESTRICTED_USER` for each user).
 10. TermIt is now available at `${URL}/${ROOT}` (http://localhost/termit by default), OntoGrapher at `${URL}/${ROOT}/ontographer` (http://localhost/termit/ontographer by default).
+    - Note that OntoGrapher requires that URI of the vocabulary/ies to be used is passed to it as query parameters in the URL. So the the URl would be, for example: http://localhost/termit/ontographer/?vocabulary=http://onto.fel.cvut.cz/ontologies/termit)
 
 ## Configuration
 

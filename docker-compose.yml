@@ -135,17 +135,14 @@ services:
     ports:
       - "127.0.0.1:3000:80"
   ontographer:
-    build:
-      context: ./ontographer/
-      dockerfile: Dockerfile
-      args:
-        - REACT_APP_CONTEXT=$ONTOGRAPHER_CONTEXT
-        - REACT_APP_ID=ontographer
-        - REACT_APP_URL=${URL}${ROOT}/ontographer
-        - REACT_APP_COMPONENTS=$ONTOGRAPHER_COMPONENTS
-        - REACT_APP_DEBUG=$ONTOGRAPHER_DEBUG
-        - REACT_APP_AUTHENTICATION=true
-        - REACT_APP_STANDALONE=true
+    image: ghcr.io/datagov-cz/ontographer/al-ontographer:latest
+    environment:
+      - CONTEXT=$ONTOGRAPHER_CONTEXT
+      - ID=ontographer
+      - URL=${URL}${ROOT}/ontographer
+      - COMPONENTS=$ONTOGRAPHER_COMPONENTS
+      - DEBUG=$ONTOGRAPHER_DEBUG
+      - AUTHENTICATION=true
     ports:
       - "127.0.0.1:8079:80"
     depends_on:
