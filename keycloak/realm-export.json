@@ -558,7 +558,9 @@
       "redirectUris": [
         "/realms/termit/account/*"
       ],
-      "webOrigins": [],
+      "webOrigins": [
+        "http://localhost:1234"
+      ],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -681,19 +683,19 @@
       "clientId": "ontographer",
       "name": "OntoGrapher",
       "description": "OntoGrapher Web UI",
-      "rootUrl": "http://localhost/",
-      "adminUrl": "http://localhost/",
-      "baseUrl": "http://localhost/termit/ontographer",
+      "rootUrl": "http://localhost:1234/",
+      "adminUrl": "http://localhost:1234/",
+      "baseUrl": "http://localhost:1234/termit/ontographer",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "",
-        "http://localhost/*"
+        "http://localhost:1234/*"
       ],
       "webOrigins": [
-        "http://localhost"
+        "http://localhost:1234"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -944,18 +946,18 @@
       "clientId": "termit-ui",
       "name": "TermIt UI",
       "description": "TermIt Web UI",
-      "rootUrl": "http://localhost",
-      "adminUrl": "http://localhost",
-      "baseUrl": "http://localhost/termit",
+      "rootUrl": "http://localhost:1234",
+      "adminUrl": "http://localhost:1234",
+      "baseUrl": "http://localhost:1234/termit",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost/*"
+        "http://localhost:1234/*"
       ],
       "webOrigins": [
-        "http://localhost"
+        "http://localhost:1234"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -971,6 +973,7 @@
         "oidc.ciba.grant.enabled": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
+        "post.logout.redirect.uris": "http://localhost:1234/*",
         "backchannel.logout.session.required": "true",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
