@@ -23,23 +23,24 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 ## Running TermIt
 
 1. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
-2. (_Optional_) Set `URL` variable in `.env` to reflect the server the app will be running on.
-3. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters
+2. (_Optional_) Set `HOST_PORT` variable in `.env` to reflect the port on which TermIt should be accessible.
+3. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. The URL should contain the `HOST_PORT` specified above.
+4. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters
    that will be used to hash the JWT authentication token for logged-in users.
-4. Start the GraphDB server
+5. Start the GraphDB server
    `docker-compose up -d termit-db-server`
-5. (_Optional_) If you have a license for GraphDB, go to http://localhost:7200/license/register and upload the license
+6. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload the license
    file.
-6. Go to http://localhost:7200/import#server, select the "termit" repository, and in the "Server files" section, click
+7. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files" section, click
    the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI
    to `http://onto.fel.cvut.cz/ontologies/termit`.
-7. Go to http://localhost:7200/sparql and execute all the queries in the `db-server/lucene` directory to create Lucene
+8. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to create Lucene
    connectors for full-text search.
-8. Run the remaining services by
+9. Run the remaining services by
    `docker-compose up -d`
-9. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use
-   grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL,
-   e.g. http://localhost/termit.
+10. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use
+    grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL,
+    e.g. http://localhost:1234/termit.
 
 ## Configuration
 
