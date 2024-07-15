@@ -24,27 +24,27 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 
 1. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
 2. (_Optional_) Set `HOST_PORT` variable in `.env` to reflect the port on which TermIt should be accessible.
-3. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. The URL should contain the `HOST_PORT` specified above.
+3. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. If the system is running
+   behind a server proxy (like Apache), the URL should be the **public URL** provided by the server proxy (for example, https://termit.fel.cvut.cz). Otherwise,
+   the URL should contain the `HOST_PORT` specified above.
 4. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters
    that will be used to hash the JWT authentication token for logged-in users.
-5. Start the GraphDB server
-   `docker-compose up -d termit-db-server`
-6. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload the license
-   file.
-7. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files" section, click
-   the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI
-   to `http://onto.fel.cvut.cz/ontologies/termit`.
-8. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to create Lucene
-   connectors for full-text search.
-9. Run the remaining services by
+5. Start all the services by running
    `docker-compose up -d`
-10. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use
-    grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL,
-    e.g. http://localhost:1234/termit.
+6. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload
+   the license file.
+7. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files"
+   section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI
+   to `http://onto.fel.cvut.cz/ontologies/termit`.
+8. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
+   create Lucene connectors for full-text search (see below w.r.t. the connector language settings).
+9. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use
+   grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL,
+   e.g. http://localhost:1234/termit.
 
 ## Configuration
 
-TermIt is highly configurable both in terms of the content as well as the way it runs. This section provides details on
+TermIt is highly configurable both in terms of the content and the way it runs. This section provides details on
 the most important configuration options.
 
 ### Language
@@ -116,6 +116,7 @@ an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_
 | ```TERMIT_SECURITY_ROLECLAIM```                    | Claim in the authentication token provided by the OIDC service containing roles mapped to TermIt user roles.<p><br>Supports nested objects via dot notation.<br>Default value: ```realm_access.roles```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | ```TERMIT_TEXTANALYSIS_URL```                      | URL of the text analysis service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ```TERMIT_URL```                                   | TermIt frontend URL.<p><br>It is used, for example, for links in emails sent to users.<br>Default value: ```http://localhost:3000/#```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
 **\* Required**
 
 The parameters are based on
