@@ -29,6 +29,7 @@ services:
     depends_on:
       - termit-db-server
     environment:
+      SPRING_PROFILES_ACTIVE: admin-registration-only, lucene
       LOGGING_FILE_NAME: /tmp/storage/termit.log
       TERMIT_PERSISTENCE_LANGUAGE: cs
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
