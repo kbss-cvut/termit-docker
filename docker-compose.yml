@@ -1,7 +1,6 @@
-version: "3.9"
 services:
   termit-nginx:
-    image: nginx:alpine3.18
+    image: nginx:1.26-alpine
     ports:
       - ${HOST_PORT:-1234}:80
     restart: always
@@ -16,6 +15,7 @@ services:
       NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx
       ROOT: ${ROOT}
       ORIGIN: ${URL}
+      PORT: ${PUBLIC_PORT:-''}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/templates/nginx.conf.template
   auth-server-db:
@@ -72,10 +72,11 @@ services:
     volumes:
       - termit-db-server:/opt/graphdb/home
   termit-server:
-    image: kbsscvut/termit:dev
+    image: kbsscvut/termit
     depends_on:
       - termit-db-server
     environment:
+      SERVER_FORWARDHEADERSSTRATEGY: framework
       LOGGING_FILE_NAME: /tmp/storage/termit.log
       TERMIT_PERSISTENCE_LANGUAGE: cs
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
@@ -109,11 +110,11 @@ services:
     volumes:
       - annotace-server:/tmp
   termit:
-    image: kbsscvut/termit-ui:dev
+    image: kbsscvut/termit-ui
     depends_on:
       - termit-server
     environment:
-      SERVER_URL: ${URL}${ROOT}/sluzby/termit-server
+      SERVER_URL: ${URL}${ROOT}/sluzby/server
       ADMIN_REGISTRATION_ONLY: "true"
       SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
       AUTHENTICATION: oidc

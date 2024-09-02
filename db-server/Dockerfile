@@ -1,4 +1,4 @@
-FROM ontotext/graphdb:10.3.2
+FROM ontotext/graphdb:10.7.0
 
 # Override parent entrypoint
 ENTRYPOINT []
