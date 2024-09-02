@@ -27,7 +27,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 3. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. If the system is running
    behind a server proxy (like Apache), the URL should be the **public URL** provided by the server proxy (for
    example, https://termit.fel.cvut.cz). Otherwise,
-   the URL should contain the `HOST_PORT` specified above (for example, http://localhost:1234). If the ** public URL**
+   the URL should contain the `HOST_PORT` specified above (for example, http://localhost:1234). If the **public URL**
    is not based on standards HTTP(S) ports (80, 443), set also the `PUBLIC_PORT` so that the backend is able to
    correctly generate server URL for the API docs using Swagger UI.
 4. (_Optional_, recommended) Set `JWT_SECRET_KEY` variable in `.env`. It should be a string of at least 32 characters
