@@ -14,8 +14,9 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 
 ### Resource Requirements
 
-- TermIt: at least 512MB RAM (1GB and more is optimal), 1 CPU
-- TermIt UI: 100MB RAM is more than enough
+- TermIt: at least 512MB RAM (1GB and more is optimal), at least 2 CPUs
+  - In case more users create and edit terms in TermIt, more CPUs is recommended
+- TermIt UI: 100MB RAM
 - GraphDB: at least 2GB RAM (depending on the amount of data stored), 1 CPU
 - Annotace: at least 512MB RAM
 - OntoGrapher: same as TermIt UI
@@ -25,27 +26,28 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 
 ## Running TermIt
 
-1. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
-2. (_Optional_) Set `HOST_PORT` variable in `.env` to reflect the port on which TermIt should be accessible.
-3. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. If the system is running
+1. Set email server configuration in `.env`. In particular, set `MAIL_HOST`, `MAIL_USERNAME` and `MAIL_PASSWORD`, (optionally) `MAIL_PORT`.
+2. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
+3. (_Optional_) Set `HOST_PORT` variable in `.env` to reflect the port on which TermIt should be accessible.
+4. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. If the system is running
    behind a server proxy (like Apache), the URL should be the **public URL** provided by the server proxy (for
    example, https://termit.fel.cvut.cz). Otherwise,
    the URL should contain the `HOST_PORT` specified above (for example, http://localhost:1234). If the **public URL**
    is not based on standards HTTP(S) ports (80, 443), set also the `PUBLIC_PORT` so that the backend is able to
    correctly generate server URL for the API docs using Swagger UI.
-4. (_Optional_) Set `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` in `.env` to a custom value.
-5. Start all the services by running
+5. (_Optional_) Set `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` in `.env` to a custom value.
+6. Start all the services by running
    `docker-compose up -d`
-6. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload
+7. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload
    the license file.
-7. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files"
+8. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files"
    section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI
    to `http://onto.fel.cvut.cz/ontologies/termit`.
-8. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
+9. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
    create Lucene connectors for full-text search (see below w.r.t. the connector language settings).
-9. (_Optional_, recommended) Go to Setup/Users and access and enable security. Create a new user that TermIt and other related services will use to access the `termit` repository. Give the new user write access to the `termit` repository. Set the new user's username and password as `GDB_USERNAME` a `GDB_PASSWORD` in `.env` so that all relevant applications can access the repository.
-10. Go to `${URL}/${ROOT}/sluzby/auth` (http://localhost:1234/termit/sluzby/auth by default) and log into the Keycloak administration console using the `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` values. Switch to realm `termit` and register new users. Assign the new users roles (use one of `ROLE_ADMIN`, `ROLE_FULL_USER` or `ROLE_RESTRICTED_USER` for each user).
-11. TermIt is now available at `${URL}/${ROOT}` (http://localhost:1234/termit by default), OntoGrapher at `${URL}/${ROOT}/ontographer` (http://localhost:1234/termit/ontographer by default).
+10. (_Optional_, recommended) Go to Setup/Users and access and enable security. Create a new user that TermIt and other related services will use to access the `termit` repository. Give the new user write access to the `termit` repository. Set the new user's username and password as `GDB_USERNAME` a `GDB_PASSWORD` in `.env` so that all relevant applications can access the repository.
+11. Go to `${URL}/${ROOT}/sluzby/auth` (http://localhost:1234/termit/sluzby/auth by default) and log into the Keycloak administration console using the `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` values. Switch to realm `termit` and register new users. Assign the new users roles (use one of `ROLE_ADMIN`, `ROLE_FULL_USER` or `ROLE_RESTRICTED_USER` for each user).
+12. TermIt is now available at `${URL}/${ROOT}` (http://localhost:1234/termit by default), OntoGrapher at `${URL}/${ROOT}/ontographer` (http://localhost:1234/termit/ontographer by default).
     - Note that OntoGrapher requires that URI of the vocabulary/ies to be used is passed to it as query parameters in the URL. So the the URL would be, for example: http://localhost:1234/termit/ontographer/?vocabulary=http://onto.fel.cvut.cz/ontologies/termit
 
 ## Configuration
@@ -127,6 +129,44 @@ an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_
 ### OntoGrapher
 
 OntoGrapher is configured to use the same authentication service (Keycloak) as TermIt. It is also configured with adresses of other relevant services via the `ONTOGRAPHER_COMPONENTS` variable. If any changes are made to the paths/URLs of these services, it is necessary to update the `ONTOGRAPHER_COMPONENTS` value accordingly and rebuild the OntoGrapher image. The `ONTOGRAPHER_COMPONENTS` is a base 64-encoded JSON string, so it is necessary to decode it, make changes, and then encode it again.
+### Host Proxy Configuration
+
+TermIt uses Web sockets for asynchronous communication between the server and the clients. If the host system runs a web
+proxy (most do),
+this needs to be configured in the proxy.
+
+#### Apache2
+
+For the Apache HTTP server (default on Debian and other Linux systems) this can be done by enabling the
+`mod_proxy_wstunnel` [module](https://httpd.apache.org/docs/2.4/mod/mod_proxy_wstunnel.html) and using the following
+rewrite rule:
+
+```apache2
+# Proxy WebSocket connections to termit at port 1234
+  RewriteCond %{HTTP:Upgrade} websocket [NC]
+  RewriteCond %{HTTP:Connection} upgrade [NC]
+  RewriteRule ^/termit?(.*) "ws://localhost:1234/termit/sluzby/server$1" [P,L]
+```
+
+#### Nginx
+
+For nginx, this can be done by adding the following snippet, which initializes the `connection_upgrade` variable, to
+the `http` section of the `nginx.conf` file:
+
+```nginx
+map $http_upgrade $connection_upgrade {
+   default upgrade;
+   ''      close;
+}
+```
+
+```nginx
+location /termit {
+   proxy_set_header Upgrade $http_upgrade;
+   proxy_set_header Connection $connection_upgrade;
+   # Other proxy headers and proxy_pass
+}
+```
 
 ### Keycloak
 
@@ -137,3 +177,4 @@ When using Keycloak as an authentication service behind a proxy, it is necessary
 - Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI` in TermIt (and db-server-proxy) to the **Docker service URL** of Keycloak. This URL is used by TermIt to access the authentication service itself
 - Both `TermIt UI` and `OntoGrapher` use the **public URL** of Keycloak
 - Keycloak is configured to automatically import the pre-configured `termit` realm
+And then adding the `Upgrade` and `Connection` headers to the request:
