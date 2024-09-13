@@ -25,12 +25,16 @@ services:
     volumes:
       - termit-db-server:/opt/graphdb/home
   termit-server:
-    image: kbsscvut/termit
+    image: kbsscvut/termit:dev
     depends_on:
       - termit-db-server
     environment:
       SERVER_FORWARDHEADERSSTRATEGY: framework
       SPRING_PROFILES_ACTIVE: admin-registration-only, lucene
+      SPRING_MAIL_HOST: ${MAIL_HOST}
+      SPRING_MAIL_PORT: ${MAIL_PORT:-587}
+      SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
       LOGGING_FILE_NAME: /tmp/storage/termit.log
       TERMIT_PERSISTENCE_LANGUAGE: cs
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
@@ -47,7 +51,7 @@ services:
     volumes:
       - annotace-server:/tmp
   termit:
-    image: kbsscvut/termit-ui
+    image: kbsscvut/termit-ui:dev
     depends_on:
       - termit-server
     environment:
