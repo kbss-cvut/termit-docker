@@ -13,17 +13,19 @@ INSERT DATA {
       "stored": true,
       "analyzed": true,
       "multivalued": true,
+      "ignoreInvalidValues": false,
       "facet": true
     },
     {
-      "fieldName": "comment",
+      "fieldName": "scopeNote",
       "propertyChain": [
-        "http://www.w3.org/2000/01/rdf-schema#comment"
+        "http://www.w3.org/2004/02/skos/core#scopeNote"
       ],
       "indexed": true,
       "stored": true,
       "analyzed": true,
       "multivalued": true,
+      "ignoreInvalidValues": false,
       "facet": true
     },
     {
@@ -35,6 +37,7 @@ INSERT DATA {
       "stored": true,
       "analyzed": true,
       "multivalued": true,
+      "ignoreInvalidValues": false,
       "facet": true
     }
   ],
@@ -48,10 +51,10 @@ INSERT DATA {
   "readonly": false,
   "detectFields": false,
   "importGraph": false,
+  "skipInitialIndexing": false,
   "boostProperties": [],
   "stripMarkup": false,
   "analyzer": "org.apache.lucene.analysis.cz.CzechAnalyzer"
 }
 ''' .
 }
-
