@@ -51,7 +51,7 @@ services:
       REPOSITORY_USERNAME: ${GDB_USERNAME}
       REPOSITORY_PASSWORD: ${GDB_PASSWORD}
       DB_SERVER_CONTEXT: http://onto.fel.cvut.cz/ontologies/application/termit/users
-      USER_TYPE: http://onto.fel.cvut.cz/ontologies/application/termit/pojem/uživatel-termitu
+      VOCABULARY_USER_TYPE: http://onto.fel.cvut.cz/ontologies/application/termit/pojem/uživatel-termitu
       ADD_ACCOUNTS: false
       REALM_ID: termit
     restart: always
@@ -93,6 +93,8 @@ services:
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_LANGUAGE_TYPES_SOURCE: /tmp/z-sgov-glosář.ttl
       TERMIT_SECURITY_PROVIDER: oidc
+      TERMIT_URL: ${URL}${ROOT}
+      TERMIT_MODELINGTOOLURL: ${URL}${ROOT}/ontographer
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}${ROOT}/sluzby/auth/realms/termit
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
     volumes:
@@ -104,6 +106,7 @@ services:
       - termit-db-server
     environment:
       SERVER_PORT: 8080
+      PROXY_URL: ${URL}${ROOT}/sluzby/db-proxy
       PROXY_GRAPHDB_URL: http://termit-db-server:7200
       PROXY_GRAPHDB_USERNAME: ${GDB_USERNAME}
       PROXY_GRAPHDB_PASSWORD: ${GDB_PASSWORD}
