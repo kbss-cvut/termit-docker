@@ -6,7 +6,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://rdfs.org/sioc/ns> {
+<http://rdfs.org/sioc/ns#> {
 	dcterms:date a owl:DatatypeProperty .
 
 	dcterms:title a owl:DatatypeProperty .

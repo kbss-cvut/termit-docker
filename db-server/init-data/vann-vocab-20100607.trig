@@ -6,7 +6,7 @@
 @prefix dcmitype: <http://purl.org/dc/dcmitype/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-<http://purl.org/vocab/vann> {
+<http://purl.org/vocab/vann/> {
 	<http://purl.org/vocab/vann/> a owl:Ontology ;
 		dcterms:title "VANN: A vocabulary for annotating vocabulary descriptions"@en ;
 		dcterms:date "2010-06-07" ;
