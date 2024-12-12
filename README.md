@@ -40,8 +40,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 7. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload
    the license file.
 8. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files"
-   section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI
-   to `http://onto.fel.cvut.cz/ontologies/termit`.
+   section, click the "Import" button for all the files.
 9. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
    create Lucene connectors for full-text search (see below w.r.t. the connector language settings).
 10. Look for admin credentials in the `termit-server` log (on Linux/WSL, you can use
