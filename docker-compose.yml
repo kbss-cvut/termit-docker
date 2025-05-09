@@ -36,6 +36,7 @@ services:
       SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
       SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
       LOGGING_FILE_NAME: /tmp/storage/termit.log
+      TERMIT_URL: ${URL}${ROOT}
       TERMIT_PERSISTENCE_LANGUAGE: cs
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
