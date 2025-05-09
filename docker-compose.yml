@@ -77,7 +77,7 @@ services:
       - termit-db-server
     environment:
       SERVER_FORWARDHEADERSSTRATEGY: framework
-      SPRING_PROFILES_ACTIVE: lucene, no-cache
+      SPRING_PROFILES_ACTIVE: lucene, no-cache, ontographer
       SPRING_MAIL_HOST: ${MAIL_HOST}
       SPRING_MAIL_PORT: ${MAIL_PORT:-587}
       SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
@@ -95,6 +95,7 @@ services:
       TERMIT_SECURITY_PROVIDER: oidc
       TERMIT_URL: ${URL}${ROOT}
       TERMIT_MODELINGTOOLURL: ${URL}${ROOT}/ontographer
+      TERMIT_VALIDATIONSERVICEURL: http://validation-service:8080/validate
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}${ROOT}/sluzby/auth/realms/termit
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
     volumes:
@@ -112,6 +113,14 @@ services:
       PROXY_GRAPHDB_PASSWORD: ${GDB_PASSWORD}
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}${ROOT}/sluzby/auth/realms/termit
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
+  validation-service:
+    image: ghcr.io/kbss-cvut/validation-service/validation-service:latest
+    depends_on:
+      - termit-db-server
+    environment:
+      VALIDATOR_REPOSITORYURL: http://termit-db-server:7200/repositories/termit
+      VALIDATOR_USERNAME: ${GDB_USERNAME}
+      VALIDATOR_PASSWORD: ${GDB_PASSWORD}
   annotace-server:
     image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
     volumes:
