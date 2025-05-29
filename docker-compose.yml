@@ -100,7 +100,7 @@ services:
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
     volumes:
       - termit-server:/tmp/storage
-      - ./db-server/init-data/z-sgov-glosář.ttl:/tmp/z-sgov-glosář.ttl
+      - ./language/z-sgov-glosář-reduced.ttl:/tmp/z-sgov-glosář.ttl
   db-server-proxy:
     image: ghcr.io/kbss-cvut/graphdb-oauth-proxy/graphdb-oauth-proxy:latest
     depends_on:
@@ -139,7 +139,7 @@ services:
       AUTH_SERVER_MANAGEMENT: ${URL}${ROOT}/sluzby/auth/admin/termit/console/
       AUTH_SERVER_USER_PROFILE: ${URL}${ROOT}/sluzby/auth/realms/termit/account/
   ontographer:
-    image: ghcr.io/datagov-cz/ontographer/al-ontographer:latest
+    image: ghcr.io/kbss-cvut/ontographer/ontographer:latest
     environment:
       - CONTEXT=$ONTOGRAPHER_CONTEXT
       - ID=ontographer
