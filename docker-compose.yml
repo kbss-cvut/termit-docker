@@ -25,7 +25,7 @@ services:
     volumes:
       - termit-db-server:/opt/graphdb/home
   termit-server:
-    image: kbsscvut/termit:dev
+    image: kbsscvut/termit
     depends_on:
       - termit-db-server
     environment:
@@ -44,6 +44,7 @@ services:
       TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       TERMIT_FILE_STORAGE: /tmp/storage
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
+      TERMIT_VALIDATIONSERVICEURL: http://validation-service:8080/validate
       TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
     volumes:
       - termit-server:/tmp/storage
@@ -51,8 +52,14 @@ services:
     image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
     volumes:
       - annotace-server:/tmp
+  validation-service:
+    image: ghcr.io/kbss-cvut/validation-service/validation-service:latest
+    depends_on:
+      - termit-db-server
+    environment:
+      VALIDATOR_REPOSITORYURL: http://termit-db-server:7200/repositories/termit
   termit:
-    image: kbsscvut/termit-ui:dev
+    image: kbsscvut/termit-ui
     depends_on:
       - termit-server
     environment:
