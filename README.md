@@ -9,20 +9,21 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - [OntoGrapher](https://github.com/datagov-cz/ontoGrapher/tree/standalone) (standalone branch)
 - [Keycloak](https://www.keycloak.org/)
 
-## Prerequisities
+## Prerequisites
+
 - Docker 23.0.1 or later & Docker Compose installed (and accessible under the current user).
 
 ### Resource Requirements
 
 - TermIt: at least 512MB RAM (1GB and more is optimal), at least 2 CPUs
-    - In case more users create and edit terms in TermIt, more CPUs is recommended
+    - In case more users create and edit terms in TermIt, more CPUs are recommended
 - TermIt UI: 100MB RAM
 - GraphDB: at least 2GB RAM (depending on the amount of data stored), 1 CPU
 - Annotace: at least 512MB RAM
 - OntoGrapher: same as TermIt UI
 - Keycloak + Postgres: (1CPU and approx. 512MB RAM)
 
-Ideally, the whole deployment should have at least 4GB RAM available, with at least 2-3 CPU cores.
+Ideally, the whole deployment should have at least 4GB RAM available, with at least 2–3 CPU cores.
 
 ## Running TermIt
 
@@ -42,14 +43,24 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 7. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload
    the license file.
 8. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files"
-   section, click the "Import" button for all the files. In the "Import settings" dialog, set the Base IRI
-   to `http://onto.fel.cvut.cz/ontologies/termit`.
+   section, click the "Import" button for all the files. In the "Import settings" dialog, set the target named graph
+   to `http://onto.fel.cvut.cz/ontologies/termit`. For `z-sgov-glosář.ttl`, `z-sgov-model.ttl`, and
+   `z-sgov-mapování-ufo.ttl`, set the target graph to `https://slovník.gov.cz/základní`.
 9. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
    create Lucene connectors for full-text search (see below w.r.t. the connector language settings).
-10. (_Optional_, recommended) Go to Setup/Users and access and enable security. Create a new user that TermIt and other related services will use to access the `termit` repository. Give the new user write access to the `termit` repository. Set the new user's username and password as `GDB_USERNAME` a `GDB_PASSWORD` in `.env` so that all relevant applications can access the repository.
-11. Go to `${URL}/${ROOT}/sluzby/auth` (http://localhost:1234/termit/sluzby/auth by default) and log into the Keycloak administration console using the `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` values. Switch to realm `termit` and register new users. Assign the new users roles (use one of `ROLE_ADMIN`, `ROLE_FULL_USER` or `ROLE_RESTRICTED_USER` for each user).
-12. TermIt is now available at `${URL}/${ROOT}` (http://localhost:1234/termit by default), OntoGrapher at `${URL}/${ROOT}/ontographer` (http://localhost:1234/termit/ontographer by default).
-    - Note that OntoGrapher requires that URI of the vocabulary/ies to be used is passed to it as query parameters in the URL. So the the URL would be, for example: http://localhost:1234/termit/ontographer/?vocabulary=http://onto.fel.cvut.cz/ontologies/termit
+10. (_Optional_, recommended) Go to Setup/Users and access and enable security. Create a new user that TermIt and other
+    related services will use to access the `termit` repository. Give the new user write access to the `termit`
+    repository. Set the new user's username and password as `GDB_USERNAME` a `GDB_PASSWORD` in `.env` so that all
+    relevant applications can access the repository.
+11. Go to `${URL}/${ROOT}/sluzby/auth` (http://localhost:1234/termit/sluzby/auth by default) and log into the Keycloak
+    administration console using the `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_ADMIN_PASSWORD` values. Switch to realm
+    `termit` and register new users. Assign the new users roles (use one of `ROLE_ADMIN`, `ROLE_FULL_USER` or
+    `ROLE_RESTRICTED_USER` for each user).
+12. TermIt is now available at `${URL}/${ROOT}` (http://localhost:1234/termit by default), OntoGrapher at
+    `${URL}/${ROOT}/ontographer` (http://localhost:1234/termit/ontographer by default).
+    - Note that OntoGrapher requires that URI of the vocabulary/ies to be used is passed to it as query parameters in
+      the URL. So the the URL would be, for
+      example: http://localhost:1234/termit/ontographer/?vocabulary=http://onto.fel.cvut.cz/ontologies/termit
 
 ## Configuration
 
@@ -66,9 +77,9 @@ following changes are needed:
 TermIt backend stores and loads strings based on the configured language. To change it, set
 the `TERMIT_PERSISTENCE_LANGUAGE` value in `docker-compose.yml` to the appropriate language tag (e.g., en, de).
 
-#### Full Text Search
+#### Full-text Search
 
-Full text search (FTS) is implemented via Lucene connectors in the underlying GraphDB repository. These connectors are
+Full-text search (FTS) is implemented via Lucene connectors in the underlying GraphDB repository. These connectors are
 language-specific, so to use a different language for TermIt and FTS working correctly, the Lucene connectors need to be
 configured accordingly. To use a different language that Czech, set the following in the connector-creating SPARQL
 queries in `db-server/lucene`:
@@ -127,14 +138,17 @@ an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_
 | ```TERMIT_TEXTANALYSIS_URL```                      | URL of the text analysis service.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ```TERMIT_URL```                                   | TermIt frontend URL.<p><br>It is used, for example, for links in emails sent to users.<br>Default value: ```http://localhost:3000/#```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ```TERMIT_MODELINGTOOLURL```                       | URL of the modeling tool.<p><br>The modeling tool can be used to further specify the relationships between terms.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+
 **\* Required**
 
 ### OntoGrapher
 
-OntoGrapher is configured to use the same authentication service (Keycloak) as TermIt. It is also configured with addresses of other relevant services via the `ONTOGRAPHER_COMPONENTS` variable.
-If any changes are made to the paths/URLs of these services, it is necessary to update the `ONTOGRAPHER_COMPONENTS` value accordingly and rebuild the OntoGrapher image.
-The `ONTOGRAPHER_COMPONENTS` is a base 64-encoded JSON string, so it is necessary to decode it, make changes, and then encode it again.
-
+OntoGrapher is configured to use the same authentication service (Keycloak) as TermIt. It is also configured with
+addresses of other relevant services via the `ONTOGRAPHER_COMPONENTS` variable.
+If any changes are made to the paths/URLs of these services, it is necessary to update the `ONTOGRAPHER_COMPONENTS`
+value accordingly and rebuild the OntoGrapher image.
+The `ONTOGRAPHER_COMPONENTS` is a base 64-encoded JSON string, so it is necessary to decode it, make changes, and then
+encode it again.
 
 ### Host Proxy Configuration
 
@@ -178,10 +192,14 @@ location /termit {
 ### Keycloak
 
 When using Keycloak as an authentication service behind a proxy, it is necessary to:
-- Set `KC_HOSTNAME_URL` and `KC_HOSTNAME_ADMIN_URL` to the public URL at which Keycloak will be accessible to the outside world (proxied)
+
+- Set `KC_HOSTNAME_URL` and `KC_HOSTNAME_ADMIN_URL` to the public URL at which Keycloak will be accessible to the
+  outside world (proxied)
 - Set `KC_HOSTNAME_STRICT_BACKCHANNEL` and `KC_PROXY` so that other services can use it via its Docker service URL
-- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI` in TermIt (and db-server-proxy) to the **public URL** of TermIt. This URL is used to validate the authentication token
-- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI` in TermIt (and db-server-proxy) to the **Docker service URL** of Keycloak. This URL is used by TermIt to access the authentication service itself
+- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI` in TermIt (and db-server-proxy) to the **public URL** of
+  TermIt. This URL is used to validate the authentication token
+- Set `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI` in TermIt (and db-server-proxy) to the **Docker service URL
+  ** of Keycloak. This URL is used by TermIt to access the authentication service itself
 - Both `TermIt UI` and `OntoGrapher` use the **public URL** of Keycloak
 - Keycloak is configured to automatically import the pre-configured `termit` realm
-And then adding the `Upgrade` and `Connection` headers to the request:
+  And then adding the `Upgrade` and `Connection` headers to the request:
