@@ -46,6 +46,7 @@ services:
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_VALIDATIONSERVICEURL: http://validation-service:8080/validate
       TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
+    restart: always
     volumes:
       - termit-server:/tmp/storage
   annotace-server:
