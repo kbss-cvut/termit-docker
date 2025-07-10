@@ -1,0 +1,113 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix d-sgov-pracovní-prostor: <https://slovník.gov.cz/datový/pracovní-prostor/> .
+@prefix d-sgov-pracovní-prostor-pojem: <https://slovník.gov.cz/datový/pracovní-prostor/pojem/> .
+
+<https://slovník.gov.cz/datový/pracovní-prostor> {
+	d-sgov-pracovní-prostor-pojem:má-kontext-sledování-změn a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "má kontext sledování změn"@cs .
+
+	d-sgov-pracovní-prostor-pojem:má-původní-heslo a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vlastnost>, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "má původní heslo"@cs .
+
+	d-sgov-pracovní-prostor-pojem:administrátor a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/objekt>, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/role> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Administrátor"@cs .
+
+	d-sgov-pracovní-prostor-pojem:verze-slovníku a skos:Concept ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Verze slovníku"@cs .
+
+	d-sgov-pracovní-prostor-pojem:slovníkový-kontext-pouze-pro-čtení a skos:Concept ;
+		skos:broader d-sgov-pracovní-prostor-pojem:slovníkový-kontext, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/role> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Slovníkový kontext pouze pro čtení"@cs .
+
+	d-sgov-pracovní-prostor-pojem:aplikační-kontext a skos:Concept ;
+		skos:broader d-sgov-pracovní-prostor-pojem:kontext, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/druh> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Aplikační kontext"@cs .
+
+	skos:prefLabel rdfs:subPropertyOf rdfs:label .
+
+	d-sgov-pracovní-prostor-pojem:vychází-z-verze a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "vychází z verze"@cs .
+
+	d-sgov-pracovní-prostor-pojem:mění-verzi a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "mění verzi"@cs .
+
+	d-sgov-pracovní-prostor:glosář a skos:ConceptScheme, owl:Ontology, <http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/pojem/glosář> ;
+		dcterms:created "2020-06-09" ;
+		dcterms:creator "Martin Ledvinka", "Miroslav Blaško" ;
+		dcterms:rights <https://creativecommons.org/licenses/by/4.0> ;
+		dcterms:title "Datový slovník pro popis pracovních prostorů - glosář"@cs ;
+		bibo:status "Specification"@en, "Specifikace"@cs ;
+		vann:preferredNamespacePrefix "d-sgov-pracovní-prostor-pojem" ;
+		vann:preferredNamespaceUri "https://slovník.gov.cz/datový/pracovní-prostor/pojem/" ;
+		owl:versionIRI <https://slovník.gov.cz/datový/pracovní-prostor/glosář/verze/0.0.1> .
+
+	d-sgov-pracovní-prostor-pojem:slovníkový-kontext a skos:Concept ;
+		skos:broader d-sgov-pracovní-prostor-pojem:kontext, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/druh> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Slovníkový kontext"@cs .
+
+	d-sgov-pracovní-prostor-pojem:kontext-sledování-změn a skos:Concept ;
+		skos:broader d-sgov-pracovní-prostor-pojem:kontext, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/druh> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Kontext sledování změn"@cs .
+
+	d-sgov-pracovní-prostor-pojem:kontext a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/objekt>, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/kategorie> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Kontext"@cs .
+
+	d-sgov-pracovní-prostor-pojem:je-technickým-kontextem-slovníku a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "je technickým kontextem slovníku"@cs .
+
+	d-sgov-pracovní-prostor-pojem:metadatový-kontext a skos:Concept ;
+		skos:broader d-sgov-pracovní-prostor-pojem:kontext, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/druh> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Metadatový kontext"@cs .
+
+	d-sgov-pracovní-prostor-pojem:uzamčený-uživatel a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/objekt>, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/role> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Uzamčený uživatel"@cs .
+
+	d-sgov-pracovní-prostor-pojem:obsahuje-slovník a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "obsahuje slovník"@cs .
+
+	d-sgov-pracovní-prostor-pojem:zablokovaný-uživatel a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/objekt>, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/role> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Zablokovaný uživatel"@cs .
+
+	d-sgov-pracovní-prostor-pojem:omezený-uživatel a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/objekt>, <https://slovník.gov.cz/základní/pojem/typ-objektu>, <https://slovník.gov.cz/základní/pojem/role> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "Omezený uživatel"@cs .
+
+	d-sgov-pracovní-prostor-pojem:odkazuje-na-kontext a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme d-sgov-pracovní-prostor:glosář ;
+		skos:prefLabel "odkazuje na kontext"@cs .
+}

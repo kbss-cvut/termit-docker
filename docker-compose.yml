@@ -83,6 +83,7 @@ services:
       SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
       SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
       LOGGING_FILE_NAME: /tmp/storage/termit.log
+      TERMIT_URL: ${URL}${ROOT}
       TERMIT_PERSISTENCE_LANGUAGE: cs
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
@@ -93,11 +94,12 @@ services:
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_LANGUAGE_TYPES_SOURCE: /tmp/z-sgov-glosář.ttl
       TERMIT_SECURITY_PROVIDER: oidc
-      TERMIT_URL: ${URL}${ROOT}
       TERMIT_MODELINGTOOLURL: ${URL}${ROOT}/ontographer
       TERMIT_VALIDATIONSERVICEURL: http://validation-service:8080/validate
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: ${URL}${ROOT}/sluzby/auth/realms/termit
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: http://auth-server:8080/realms/termit/protocol/openid-connect/certs
+    restart:
+      always
     volumes:
       - termit-server:/tmp/storage
       - ./language/z-sgov-glosář-reduced.ttl:/tmp/z-sgov-glosář.ttl

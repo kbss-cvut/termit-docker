@@ -27,8 +27,8 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 
 ## Running TermIt
 
-1. Set email server configuration in `.env`. In particular, set `MAIL_HOST`, `MAIL_USERNAME` and `MAIL_PASSWORD`, (
-   optionally) `MAIL_PORT`.
+1. Set email server configuration in `.env`. In particular, set `MAIL_HOST`, `MAIL_USERNAME` and `MAIL_PASSWORD`,
+   (optionally) `MAIL_PORT`.
 2. (_Optional_) Set `ROOT` variable in `.env` to reflect the local context prefix the app will be running on.
 3. (_Optional_) Set `HOST_PORT` variable in `.env` to reflect the port on which TermIt should be accessible.
 4. (_Optional_) Set `URL` variable in `.env` to reflect the address TermIt will be running on. If the system is running
@@ -42,11 +42,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
    `docker-compose up -d`
 7. (_Optional_) If you have a license for GraphDB, go to `${URL}/${ROOT}/sluzby/db-server/license/register` and upload
    the license file.
-8. Go to `${URL}/${ROOT}/sluzby/db-server/import#server`, select the "termit" repository, and in the "Server files"
-   section, click the "Import" button for all the files. In the "Import settings" dialog, set the target named graph
-   to `http://onto.fel.cvut.cz/ontologies/termit`. For `z-sgov-glosář.ttl`, `z-sgov-model.ttl`, and
-   `z-sgov-mapování-ufo.ttl`, set the target graph to `https://slovník.gov.cz/základní`.
-9. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
+8. Go to `${URL}/${ROOT}/sluzby/db-server/sparql` and execute all the queries in the `db-server/lucene` directory to
    create Lucene connectors for full-text search (see below w.r.t. the connector language settings).
 10. (_Optional_, recommended) Go to Setup/Users and access and enable security. Create a new user that TermIt and other
     related services will use to access the `termit` repository. Give the new user write access to the `termit`

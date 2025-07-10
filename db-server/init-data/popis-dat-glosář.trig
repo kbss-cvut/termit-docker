@@ -1,0 +1,542 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dc11: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix a-popis-dat-pojem: <http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/pojem/> .
+@prefix a-popis-dat: <http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/> .
+
+<http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat> {
+	a-popis-dat-pojem:je-pojmem a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-záznamem, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is term of"@en, "Je pojmem"@cs .
+
+	a-popis-dat-pojem:číselník a skos:Concept ;
+		skos:broader a-popis-dat-pojem:databázová-tabulka, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Codelist"@en, "Číselník"@cs .
+
+	a-popis-dat-pojem:má-heslo a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vlastnost>, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has password"@en, "Má heslo"@cs .
+
+	a-popis-dat-pojem:má-posledního-editora a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-editora, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Má posledního editora\", \"Has last editor"@en .
+
+	a-popis-dat-pojem:má-datový-typ a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has data type"@en, "Má datový typ"@cs .
+
+	a-popis-dat:glosář a skos:ConceptScheme, a-popis-dat-pojem:glosář, owl:Ontology ;
+		rdfs:label "Vocabulary for data description - glossary"@en, "Slovník popis dat - glosář"@cs ;
+		dc11:creator "Michal Med" ;
+		dc11:rights <https://creativecommons.org/licenses/by/4.0/> ;
+		dc11:title "Vocabulary for data description - glossary"@en, "Slovník popis dat - glosář"@cs ;
+		dcterms:created "13.11.2019" ;
+		bibo:status "Specifikace"@cs, "Specification"@en ;
+		vann:preferredNamespacePrefix "a-popis-dat-pojem" ;
+		vann:preferredNamespaceUri "http://onto.fel.cvut.cz/ontologies/slovnik/agendovy/popis-dat/pojem/" ;
+		owl:imports <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/1.0.0> ;
+		owl:versionIRI <http://onto.fel.cvut.cz/ontologies/slovnik/agendovy/popis-dat/glosář/verze/1.0.7> .
+
+	a-popis-dat-pojem:záznam a skos:Concept ;
+		skos:broader skos:Concept, <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Record"@en, "Záznam"@cs .
+
+	a-popis-dat-pojem:je-záznamem-datové-sady a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-záznamem, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is record of data set"@en, "Je záznamem datové sady"@cs .
+
+	a-popis-dat-pojem:legislativní-slovník a skos:Concept ;
+		skos:broader a-popis-dat-pojem:dokumentový-slovník, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Legislative vocabulary"@en, "Legislativní slovník"@cs .
+
+	a-popis-dat-pojem:poskytuje-záznam a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Provides record"@en, "Poskytuje záznam"@cs .
+
+	a-popis-dat-pojem:statistický-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:atribut-záznamu, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Statistic attribute of record"@en, "Statistický atribut záznamu"@cs .
+
+	a-popis-dat-pojem:funkce a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/trope>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Function"@en, "Funkce"@cs .
+
+	a-popis-dat-pojem:má-dokumentový-slovník a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has document vocabulary"@en, "Má dokumentový slovník"@cs .
+
+	a-popis-dat-pojem:má-atribut a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has attribute"@en, "Má atribut"@cs .
+
+	a-popis-dat-pojem:soubor a skos:Concept ;
+		skos:broader a-popis-dat-pojem:zdroj, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "File"@en, "Soubor"@cs .
+
+	a-popis-dat-pojem:je-datovým-atributem-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-atributem-záznamu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is data attribute of record"@en, "Je datovým atributem záznamu"@cs .
+
+	a-popis-dat-pojem:zdroj a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Resource"@en, "Zdroj"@cs .
+
+	a-popis-dat-pojem:má-referenční-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-atribut-záznamu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has reference attribute of record"@en, "Má referenční atribut záznamu"@cs .
+
+	a-popis-dat-pojem:je-referenčním-atributem-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-atributem-záznamu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is reference attribute of record"@en, "Je referenčním atributem záznamu"@cs .
+
+	a-popis-dat-pojem:má-atribut-databázové-tabulky a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-atribut, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has data set attribute"@en, "Má atribut databázové tabulky"@cs .
+
+	a-popis-dat-pojem:dokument a skos:Concept ;
+		skos:broader a-popis-dat-pojem:zdroj, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Document"@en, "Dokument"@cs .
+
+	a-popis-dat-pojem:má-číselníkovou-hodnotu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-atribut-databázové-tabulky, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has codelist value"@en, "Má číselníkovou hodnotu"@cs .
+
+	a-popis-dat-pojem:term a skos:Concept ;
+		skos:broader a-popis-dat-pojem:záznam, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Term"@en, "Term"@cs .
+
+	a-popis-dat-pojem:je-pojmem-ze-slovníku a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-pojmem, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is term from vocabulary"@en, "Je pojmem ze slovníku"@cs .
+
+	a-popis-dat-pojem:dokumentový-slovník a skos:Concept ;
+		skos:broader a-popis-dat-pojem:slovník, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Document vocabulary"@en, "Dokumentový slovník"@cs .
+
+	a-popis-dat-pojem:má-datum-a-čas-poslední-modifikace a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-datum-a-čas-modifikace, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has date and time of last modification"@en, "Má datum a čas poslední modifikace"@cs .
+
+	a-popis-dat-pojem:je-záznamem a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is record of"@en, "Je záznamem"@cs .
+
+	a-popis-dat-pojem:datový-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:atribut-záznamu, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Data attribute of record"@en, "Datový atribut záznamu"@cs .
+
+	a-popis-dat-pojem:atribut a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/objekt>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Attribute"@en, "Atribut"@cs .
+
+	a-popis-dat-pojem:zdroj-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:zdroj-dat, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Source of record"@en, "Zdroj záznamu"@cs .
+
+	a-popis-dat-pojem:databázová-tabulka-jako-zdroj-dat a skos:Concept ;
+		skos:broader a-popis-dat-pojem:dotaz-sql-databáze, a-popis-dat-pojem:databázová-tabulka, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Database table as a data source"@en, "Databázová tabulka jako zdroj dat"@cs .
+
+	a-popis-dat-pojem:má-příjmení a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vlastnost>, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has surname"@en, "Má příjmení"@cs .
+
+	a-popis-dat-pojem:má-model a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/has-part>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has model"@en, "Má model"@cs .
+
+	a-popis-dat-pojem:je-v-kontextu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is in context"@en, "Je v kontextu"@cs .
+
+	a-popis-dat-pojem:má-datum-a-čas-modifikace a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vlastnost>, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has date and time of modification"@en, "Má datum a čas modifikace"@cs .
+
+	a-popis-dat-pojem:je-statistickým-atributem-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-atributem-záznamu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is statistic attribute of record"@en, "Je statistickým atributem záznamu"@cs .
+
+	a-popis-dat-pojem:má-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-atribut, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has attribute of record"@en, "Má atribut záznamu"@cs .
+
+	a-popis-dat-pojem:datový-slovník a skos:Concept ;
+		skos:broader a-popis-dat-pojem:slovník, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Data vocabulary"@en, "Datový slovník"@cs .
+
+	a-popis-dat-pojem:má-statistický-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-atribut-záznamu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has statistic attribute of record"@en, "Má statistický atribut záznamu"@cs .
+
+	a-popis-dat-pojem:má-hodnotu-z-číselníku a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has codelist value"@en, "Má hodnotu z číselníku"@cs .
+
+	a-popis-dat-pojem:referenční-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:atribut-záznamu, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Reference attribute of record"@en, "Referenční atribut záznamu"@cs .
+
+	a-popis-dat-pojem:definuje-funkci a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Defines function"@en, "Definuje funkci"@cs .
+
+	a-popis-dat-pojem:je-v-kontextu-datové-sady a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-v-kontextu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is in context of data set"@en, "Je v kontextu datové sady"@cs .
+
+	a-popis-dat-pojem:dokument-legislativní-povahy a skos:Concept ;
+		skos:broader a-popis-dat-pojem:dokument, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Document of legislative nature"@en, "Dokument legislativní povahy"@cs .
+
+	a-popis-dat-pojem:atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:term, a-popis-dat-pojem:atribut, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Attribute of record"@en, "Atribut záznamu"@cs .
+
+	a-popis-dat-pojem:číselníková-hodnota a skos:Concept ;
+		skos:broader a-popis-dat-pojem:atribut-databázové-tabulky, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Codelist value"@en, "Číselníková hodnota"@cs .
+
+	a-popis-dat-pojem:je-atributem-databázové-tabulky a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-atributem, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is attribute of database table"@en, "Je atributem databázové tabulky"@cs .
+
+	a-popis-dat-pojem:dotaz-sql-databáze a skos:Concept ;
+		skos:broader a-popis-dat-pojem:zdroj-dat, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "SQL database query"@en, "Dotaz SQL databáze"@cs .
+
+	a-popis-dat-pojem:má-autora a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-editora, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has author"@en, " Má autora"@cs .
+
+	a-popis-dat-pojem:má-editora a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has editor"@en, "Má editora"@cs .
+
+	a-popis-dat-pojem:importuje-slovník a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Imports vocabulary"@en, "Importuje slovník"@cs .
+
+	a-popis-dat-pojem:má-glosář a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/has-part>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has glossary"@en, "Má glosář"@cs .
+
+	a-popis-dat-pojem:poskytuje-atribut-záznamu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Provides attribute of record"@en, "Poskytuje atribut záznamu"@cs .
+
+	a-popis-dat-pojem:zdroj-datové-sady a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/dataset-source>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Data set source"@en, "Zdroj datové sady"@cs .
+
+	a-popis-dat-pojem:model a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Model"@en, "Model"@cs .
+
+	skos:prefLabel rdfs:subPropertyOf rdfs:label .
+
+	a-popis-dat-pojem:databáze a skos:Concept ;
+		skos:broader a-popis-dat-pojem:zdroj, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Database"@en, "Databáze"@cs .
+
+	a-popis-dat-pojem:je-atributem a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is attribute of"@en, "Je atributem"@cs .
+
+	a-popis-dat-pojem:atribut-databázové-tabulky a skos:Concept ;
+		skos:broader a-popis-dat-pojem:atribut, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Attribute of database table"@en, "Atribut databázové tabulky"@cs .
+
+	a-popis-dat-pojem:geometrický-atribut a skos:Concept ;
+		skos:broader a-popis-dat-pojem:atribut, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Geometry attribute"@en, "Geometrický atribut"@cs .
+
+	a-popis-dat-pojem:katalogizuje-datovou-sadu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Catalogues data set"@en, "Katalogizuje datovou sadu"@cs .
+
+	a-popis-dat-pojem:obsahuje-kořenový-pojem a skos:Concept ;
+		skos:broader skos:hasTopConcept, a-popis-dat-pojem:obsahuje-pojem, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Contains root term"@en, "Obsahuje kořenový pojem"@cs .
+
+	a-popis-dat-pojem:obsahuje-pojem a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Contains term"@en, "Obsahuje pojem"@cs .
+
+	a-popis-dat-pojem:má-soubor a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has file"@en, "Má soubor"@cs .
+
+	a-popis-dat-pojem:datová-sada a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/dataset>, a-popis-dat-pojem:zdroj, a-popis-dat-pojem:kontext, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Data set"@en, "Datová sada"@cs .
+
+	a-popis-dat-pojem:poskytuje-datovou-sadu a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/offers-dataset>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Provides data set"@en, "Poskytuje datovou sadu"@cs .
+
+	a-popis-dat-pojem:glosář a skos:Concept ;
+		skos:broader skos:ConceptScheme, <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Glossary"@en, "Glosář"@cs .
+
+	a-popis-dat-pojem:diagram a skos:Concept ;
+		skos:broader skos:ConceptScheme, <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Diagram"@en, "Diagram"@cs .
+
+	a-popis-dat-pojem:je-částí-dokumentu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is part of document"@en, "Je částí dokumentu"@cs .
+
+	a-popis-dat-pojem:má-křestní-jméno a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vlastnost>, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has first name"@en, "Má křestní jméno"@cs .
+
+	a-popis-dat-pojem:je-atributem-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-atributem, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is attribute of record"@en, "Je atributem záznamu"@cs .
+
+	a-popis-dat-pojem:slovník a skos:Concept ;
+		skos:broader a-popis-dat-pojem:datová-sada, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Vocabulary"@en, "Slovník"@cs .
+
+	a-popis-dat-pojem:má-datový-atribut-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-atribut-záznamu, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has data attribute of record"@en, "Má datový atribut záznamu"@cs .
+
+	a-popis-dat-pojem:katalog a skos:Concept ;
+		skos:broader a-popis-dat-pojem:datová-sada, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Catalogue"@en, "Katalog"@cs .
+
+	a-popis-dat-pojem:popisuje-legislativní-dokument a skos:Concept ;
+		skos:broader a-popis-dat-pojem:popisuje-dokument, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Describes legislative document"@en, "Popisuje legislativní dokument"@cs .
+
+	a-popis-dat-pojem:popisuje-dokument a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Describes document"@en, "Popisuje dokument"@cs .
+
+	a-popis-dat-pojem:uživatel a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/dataset-descriptor/pojem/person>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "User"@en, "Uživatel"@cs .
+
+	a-popis-dat-pojem:zdroj-dat a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Data source"@en, "Zdroj dat"@cs .
+
+	a-popis-dat-pojem:má-zdroj a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has resource"@en, "Má zdroj"@cs .
+
+	a-popis-dat-pojem:má-uživatelské-jméno a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vlastnost>, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has username"@en, "Má uživatelské jméno"@cs .
+
+	a-popis-dat-pojem:databázová-tabulka a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/object>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Database table"@en, "Databázová tabulka"@cs .
+
+	a-popis-dat-pojem:zdroj-atributu-záznamu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:zdroj-dat, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Source of attribute of record"@en, "Zdroj atributu záznamu"@cs .
+
+	a-popis-dat-pojem:agendový-slovník a skos:Concept ;
+		skos:broader a-popis-dat-pojem:slovník, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Agendový slovník"@cs .
+
+	a-popis-dat-pojem:kontext a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/endurant>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Context"@en, "Kontext"@cs .
+
+	a-popis-dat-pojem:má-datum-a-čas-vytvoření a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-datum-a-čas-modifikace, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has date and time of creation"@en, "Má datum a čas vytvoření"@cs .
+
+	a-popis-dat-pojem:změna a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/typ-události> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Change"@en, "Změna"@cs .
+
+	a-popis-dat-pojem:vytvoření-entity a skos:Concept ;
+		skos:broader a-popis-dat-pojem:změna, <https://slovník.gov.cz/základní/pojem/typ-události> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Creation of entity"@en, "Vytvoření entity"@cs .
+
+	a-popis-dat-pojem:úprava-entity a skos:Concept ;
+		skos:broader a-popis-dat-pojem:změna, <https://slovník.gov.cz/základní/pojem/typ-události> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Adjustment of entity"@en, "Úprava entity"@cs .
+
+	a-popis-dat-pojem:má-změněnou-entitu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has changed entity"@en, "Má změněnou entitu"@cs .
+
+	a-popis-dat-pojem:má-změněný-atribut a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has changed attribute"@en, "Má změněný atribut"@cs .
+
+	a-popis-dat-pojem:má-novou-hodnotu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has new value"@en, "Má novou hodnotu"@cs .
+
+	a-popis-dat-pojem:má-původní-hodnotu a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has original value"@en, "Má původní hodnotu"@cs .
+
+	a-popis-dat-pojem:verze-objektu a skos:Concept ;
+		skos:broader <http://onto.fel.cvut.cz/ontologies/ufo/pojem/endurant>, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Version of object"@en, "Verze objektu"@cs .
+
+	a-popis-dat-pojem:verze-slovníku a skos:Concept ;
+		skos:broader a-popis-dat-pojem:verze-objektu, a-popis-dat-pojem:slovník, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Version of vocabulary"@en, "Verze slovníku"@cs .
+
+	a-popis-dat-pojem:verze-modelu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:verze-objektu, a-popis-dat-pojem:model, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Version of model"@en, "Verze modelu"@cs .
+
+	a-popis-dat-pojem:verze-glosáře a skos:Concept ;
+		skos:broader a-popis-dat-pojem:verze-objektu, a-popis-dat-pojem:glosář, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Version of glossary"@en, "Verze glosáře"@cs .
+
+	a-popis-dat-pojem:verze-pojmu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:verze-objektu, a-popis-dat-pojem:term, <https://slovník.gov.cz/základní/pojem/typ-objektu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Version of term"@en, "Verze pojmu"@cs .
+
+	a-popis-dat-pojem:je-verzí a skos:Concept ;
+		skos:broader <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is version of"@en, "Je verzí"@cs .
+
+	a-popis-dat-pojem:je-verzí-slovníku a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-verzí, <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is version of vocabulary"@en, "Je verzí slovníku"@cs .
+
+	a-popis-dat-pojem:je-verzí-modelu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-verzí, <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is version of model"@en, "Je verzí modelu"@cs .
+
+	a-popis-dat-pojem:je-verzí-glosáře a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-verzí, <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is version of glossary"@en, "Je verzí glosáře"@cs .
+
+	a-popis-dat-pojem:je-verzí-pojmu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:je-verzí, <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Is version of term"@en, "Je verzí pojmu"@cs .
+
+	a-popis-dat-pojem:má-verzi-glosáře a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-glosář, <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has glossary version"@en, "Má verzi glosáře"@cs .
+
+	a-popis-dat-pojem:má-verzi-modelu a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-model, <https://slovník.gov.cz/základní/pojem/vztah>, <https://slovník.gov.cz/základní/pojem/typ-vztahu> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has model version"@en, "Má verzi modelu"@cs .
+
+	a-popis-dat-pojem:má-datum-a-čas-vytvoření-verze a skos:Concept ;
+		skos:broader a-popis-dat-pojem:má-datum-a-čas-modifikace, <https://slovník.gov.cz/základní/pojem/typ-vlastnosti> ;
+		skos:inScheme a-popis-dat:glosář ;
+		skos:prefLabel "Has date and time of version creation"@en, "Má datum a čas vytvoření verze"@cs .
+}
