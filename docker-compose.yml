@@ -61,6 +61,8 @@ services:
       - termit-db-server
     environment:
       VALIDATOR_REPOSITORYURL: http://termit-db-server:7200/repositories/termit
+      VALIDATOR_USERNAME: ${GDB_USERNAME}
+      VALIDATOR_PASSWORD: ${GDB_PASSWORD}
   termit:
     image: kbsscvut/termit-ui
     depends_on:
