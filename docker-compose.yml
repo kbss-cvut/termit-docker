@@ -40,6 +40,8 @@ services:
       TERMIT_PERSISTENCE_LANGUAGE: cs
       TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
       TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
+      TERMIT_REPOSITORY_USERNAME: ${GDB_USERNAME}
+      TERMIT_REPOSITORY_PASSWORD: ${GDB_PASSWORD}
       TERMIT_CORS_ALLOWEDORIGINS: ${URL}
       TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
       TERMIT_FILE_STORAGE: /tmp/storage

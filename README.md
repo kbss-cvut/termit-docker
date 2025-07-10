@@ -45,6 +45,14 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
    grep: `docker-compose logs | grep "Admin credentials"`) and use them for first login at the configured URL,
    e.g., http://localhost:1234/termit.
 
+### Security Note
+
+Note that the default setup shown above does not protect access to the GraphDB repository. If TermIt as a whole is
+exposed (e.g., via a reverse proxy), anyone could access and edit data in GraphDB. To fix this, go to the GraphDB
+workbench (at `${URL}/${ROOT}/sluzby/db-server`), go to "Setup" -> "Users and Access", create an admin user and enable
+security. Then create another user for TermIt and give it write access to the `termit` repository. Use the TermIt user's
+credentials as values for `GDB_USERNAME` and `GDB_PASSWORD` in `.env` and restart all services.
+
 ## Configuration
 
 TermIt is highly configurable both in terms of the content and the way it runs. This section provides details on
