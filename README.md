@@ -5,6 +5,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - [GraphDB](https://www.ontotext.com/products/graphdb/) (database)
 - [TermIt](https://github.com/kbss-cvut/termit) (backend)
 - [Annotace](https://github.com/kbss-cvut/annotace)
+- [Validation service](https://github.com/kbss-cvut/validation-service/)
 - [TermIt UI](https://github.com/kbss-cvut/termit-ui) (frontend)
 - [OntoGrapher](https://github.com/datagov-cz/ontoGrapher/tree/standalone) (standalone branch)
 - [Keycloak](https://www.keycloak.org/)
@@ -20,6 +21,7 @@ TermIt Docker serves to spin off a TermIt deployment, consisting of:
 - TermIt UI: 100MB RAM
 - GraphDB: at least 2GB RAM (depending on the amount of data stored), 1 CPU
 - Annotace: at least 512MB RAM
+- Validation service: at least 1GB RAM (depending on the size of the vocabulary)
 - OntoGrapher: same as TermIt UI
 - Keycloak + Postgres: (1CPU and approx. 512MB RAM)
 
@@ -72,17 +74,6 @@ following changes are needed:
 
 TermIt backend stores and loads strings based on the configured language. To change it, set
 the `TERMIT_PERSISTENCE_LANGUAGE` value in `docker-compose.yml` to the appropriate language tag (e.g., en, de).
-
-#### Full-text Search
-
-Full-text search (FTS) is implemented via Lucene connectors in the underlying GraphDB repository. These connectors are
-language-specific, so to use a different language for TermIt and FTS working correctly, the Lucene connectors need to be
-configured accordingly. To use a different language that Czech, set the following in the connector-creating SPARQL
-queries in `db-server/lucene`:
-
-- Set the value of the "languages" attribute to the appropriate language tag
-- Set the value of the "analyzer" attribute to the appropriate fully qualified Lucene analyzer class name. See, for
-  example, https://lucene.apache.org/core/4_0_0/analyzers-common/overview-summary.html.
 
 ### Further TermIt Configuration
 
