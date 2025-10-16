@@ -1,6 +1,11 @@
 # TermIt Docker
 
-TermIt Docker serves to spin off a TermIt deployment, consisting of:
+TermIt is a [SKOS](https://www.w3.org/TR/skos-reference/) compliant terminology management tool based on Semantic Web
+technologies. It allows managing vocabularies consisting of thesauri and ontologies. It can also manage documents whose
+content can be used to seed the vocabularies (e.g., normative documents with definition of domain terminology). In
+addition, documents can also be analyzed to discover occurrences of the vocabulary terms.
+
+TermIt Docker serves to spin off a TermIt deployment using Docker Compose. The deployment consists of:
 
 - [GraphDB](https://www.ontotext.com/products/graphdb/) (database)
 - [TermIt](https://github.com/kbss-cvut/termit) (backend)
@@ -60,19 +65,19 @@ the most important configuration options.
 
 ### Language
 
-The default configuration assumes TermIt is run for Czech vocabularies. To use TermIt in other environments, the
-following changes are needed:
+TermIt backend uses a default language to set the primary language for vocabularies if not specified by the user.
+By default, Czech is used. To configure it, set the `TERMIT_PERSISTENCE_LANGUAGE` value in `docker-compose.yml` to the
+appropriate language tag (e.g., en, de).
 
-#### TermIt
+Similarly, all identifier generators use Czech namespaces. If this is a problem for you, you can change them (see the
+next paragraph).
 
-TermIt backend uses a default language to set the primary language for vocabularies. To configure it, set
-the `TERMIT_PERSISTENCE_LANGUAGE` value in `docker-compose.yml` to the appropriate language tag (e.g., en, de).
+### Further Backend Configuration
 
-### Further TermIt Configuration
-
-As stated above, TermIt is highly configurable. [This table](./termit-config.md) lists the names of environment
+[This table](./termit-config.md) lists the names of environment
 variables that can be passed to TermIt backend either directly in `docker-compose.yml`, in
-an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_file), or via command line.
+an [env_file](https://docs.docker.com/compose/compose-file/compose-file-v3/#env_file) (`.env` is already configured), or
+via command line.
 
 The parameters are based on
 the [Configuration](https://github.com/kbss-cvut/termit/blob/master/src/main/java/cz/cvut/kbss/termit/util/Configuration.java)
