@@ -75,6 +75,8 @@ services:
     image: kbsscvut/termit
     depends_on:
       - termit-db-server
+    env_file:
+      - .env
     environment:
       SERVER_FORWARDHEADERSSTRATEGY: framework
       SPRING_PROFILES_ACTIVE: lucene, no-cache, ontographer
