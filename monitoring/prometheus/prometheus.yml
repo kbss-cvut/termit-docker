@@ -7,4 +7,4 @@ scrape_configs:
           password_file: "/etc/prometheus/password_file"
       static_configs:
           - targets:
-                - host.docker.internal:8080
+                - 'termit-server:8080'
