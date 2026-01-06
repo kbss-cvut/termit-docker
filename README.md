@@ -144,3 +144,6 @@ and go to `${URL}/${ROOT}/sluzby/monitoring` to access the Grafana dashboard. Lo
 
 A basic dashboard (called `TermIt State`) is provided (see `monitoring/grafana/provisioning`). Feel free to adjust it as
 necessary.
+
+_Note that if you do not set the actuator credentials, TermIt will generate random credentials for you, but this will
+mean Prometheus (and thus Grafana) will not be able to access the metrics endpoint._
