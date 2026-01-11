@@ -21,9 +21,9 @@ services:
   auth-server-db:
     image: postgres:13
     environment:
-      POSTGRES_DB:
-      POSTGRES_USER:
-      POSTGRES_PASSWORD:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_1
     restart: always
     volumes:
       - auth-server-db:/var/lib/postgresql/data
@@ -40,12 +40,12 @@ services:
       KC_HTTP_ENABLED: true
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN_USER}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      DB_VENDOR: POSTGRES
-      DB_ADDR: auth-server-db
-      DB_DATABASE: ${POSTGRES_DB}
-      DB_USER: ${POSTGRES_USER}
-      DB_SCHEMA: public
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL_HOST: termit-ipr-prod-auth-server-db
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_SCHEMA: public
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_1
       DB_SERVER_URL: http://termit-db-server:7200
       DB_SERVER_REPOSITORY_ID: termit
       REPOSITORY_USERNAME: ${GDB_USERNAME}
