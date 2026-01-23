@@ -62,7 +62,7 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
 12. TermIt is now available at `${URL}/${ROOT}` (http://localhost:1234/termit by default), OntoGrapher at
     `${URL}/${ROOT}/ontographer` (http://localhost:1234/termit/ontographer by default).
     - Note that OntoGrapher requires that URI of the vocabulary/ies to be used is passed to it as query parameters in
-      the URL. So the the URL would be, for
+      the URL. So the URL would be, for
       example: http://localhost:1234/termit/ontographer/?vocabulary=http://onto.fel.cvut.cz/ontologies/termit
 
 ## Configuration
@@ -93,12 +93,11 @@ class in TermIt backend. If you need to further adjust the behavior of TermIt, c
 ### Host Proxy Configuration
 
 TermIt uses Web sockets for asynchronous communication between the server and the clients. If the host system runs a web
-proxy (most do),
-this needs to be configured in the proxy.
+proxy (most do), this needs to be configured in the proxy.
 
 #### Apache2
 
-For the Apache HTTP server (default on Debian and other Linux systems) this can be done by enabling the
+For the Apache HTTP Server (default on Debian and other Linux systems) this can be done by enabling the
 `mod_proxy_wstunnel` [module](https://httpd.apache.org/docs/2.4/mod/mod_proxy_wstunnel.html) and using the following
 rewrite rule:
 
