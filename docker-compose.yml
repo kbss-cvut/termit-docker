@@ -50,6 +50,8 @@ services:
       TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
       TERMIT_VALIDATIONSERVICEURL: http://validation-service:8080/validate
       TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
+      TERMIT_ACTUATOR_USERNAME: ${ACTUATOR_USERNAME}
+      TERMIT_ACTUATOR_PASSWORD: ${ACTUATOR_PASSWORD}
     restart: always
     volumes:
       - termit-server:/tmp/storage

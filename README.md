@@ -122,3 +122,27 @@ location /termit {
    # Other proxy headers and proxy_pass
 }
 ```
+
+### Monitoring
+
+TermIt backend publishes metrics for [Prometheus](https://prometheus.io/) using Spring Boot Actuator.
+[Grafana](https://grafana.com/) and Prometheus can be used to monitor TermIt based on these metrics.
+`docker-compose.monitoring.yml`
+provides a basic setup for monitoring TermIt using these tools. In order to use it, set the following environment
+variables:
+
+- `GRAFANA_USERNAME` - Grafana admin user
+- `GRAFANA_PASSWORD` - Grafana admin user password
+- `ACTUATOR_USERNAME` - used to secure access to the Actuator metrics endpoint
+- `ACTUATOR_PASSWORD` - used to secure access to the Actuator metrics endpoint
+
+Start the whole system (including the monitoring services) by running
+`docker-compose -f docker-compose.monitoring.yml up -d`
+and go to `${URL}/${ROOT}/sluzby/monitoring` to access the Grafana dashboard. Login using the `GRAFANA_USERNAME` and
+`GRAFANA_PASSWORD` environment variables.
+
+A basic dashboard (called `TermIt State`) is provided (see `monitoring/grafana/provisioning`). Feel free to adjust it as
+necessary.
+
+_Note that if you do not set the actuator credentials, TermIt will generate random credentials for you, but this will
+mean Prometheus (and thus Grafana) will not be able to access the metrics endpoint._
