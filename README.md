@@ -65,6 +65,14 @@ Ideally, the whole deployment should have at least 4GB RAM available, with at le
       the URL. So the URL would be, for
       example: http://localhost:1234/termit/ontographer/?vocabulary=http://onto.fel.cvut.cz/ontologies/termit
 
+### Which Docker Compose File to Use
+
+The configuration contains two Docker Compose files:
+
+- `docker-compose.yml` runs TermIt and its necessary services (validation-service, Annotace)
+- `docker-compose.monitoring.yml` runs TermIt and its necessary services + monitoring services (Prometheus, Grafana).
+  See below for more info on monitoring
+
 ## Configuration
 
 TermIt is highly configurable both in terms of the content and the way it runs. This section provides details on
@@ -120,6 +128,8 @@ map $http_upgrade $connection_upgrade {
 }
 ```
 
+And then adding the `Upgrade` and `Connection` headers to the request:
+
 ```nginx
 location /termit {
    proxy_set_header Upgrade $http_upgrade;
@@ -142,3 +152,27 @@ When using Keycloak as an authentication service behind a proxy, it is necessary
 - Both `TermIt UI` and `OntoGrapher` use the **public URL** of Keycloak
 - Keycloak is configured to automatically import the pre-configured `termit` realm
   And then adding the `Upgrade` and `Connection` headers to the request:
+
+### Monitoring
+
+TermIt backend publishes metrics for [Prometheus](https://prometheus.io/) using Spring Boot Actuator.
+[Grafana](https://grafana.com/) and Prometheus can be used to monitor TermIt based on these metrics.
+`docker-compose.monitoring.yml`
+provides a basic setup for monitoring TermIt using these tools. In order to use it, set the following environment
+variables:
+
+- `GRAFANA_USERNAME` - Grafana admin user
+- `GRAFANA_PASSWORD` - Grafana admin user password
+- `ACTUATOR_USERNAME` - used to secure access to the Actuator metrics endpoint
+- `ACTUATOR_PASSWORD` - used to secure access to the Actuator metrics endpoint
+
+Start the whole system (including the monitoring services) by running
+`docker-compose -f docker-compose.monitoring.yml up -d`
+and go to `${URL}/${ROOT}/sluzby/monitoring` to access the Grafana dashboard. Login using the `GRAFANA_USERNAME` and
+`GRAFANA_PASSWORD` environment variables.
+
+A basic dashboard (called `TermIt State`) is provided (see `monitoring/grafana/provisioning`). Feel free to adjust it as
+necessary.
+
+_Note that if you do not set the actuator credentials, TermIt will generate random credentials for you, but this will
+mean Prometheus (and thus Grafana) will not be able to access the metrics endpoint._
