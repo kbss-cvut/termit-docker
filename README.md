@@ -58,6 +58,14 @@ workbench (at `${URL}/${ROOT}/sluzby/db-server`), go to "Setup" -> "Users and Ac
 security. Then create another user for TermIt and give it write access to the `termit` repository. Use the TermIt user's
 credentials as values for `GDB_USERNAME` and `GDB_PASSWORD` in `.env` and restart all services.
 
+### Which Docker Compose File to Use
+
+The configuration contains two Docker Compose files:
+
+- `docker-compose.yml` runs TermIt and its necessary services (validation-service, Annotace)
+- `docker-compose.monitoring.yml` runs TermIt and its necessary services + monitoring services (Prometheus, Grafana).
+  See below for more info on monitoring
+
 ## Configuration
 
 TermIt is highly configurable both in terms of the content and the way it runs. This section provides details on
