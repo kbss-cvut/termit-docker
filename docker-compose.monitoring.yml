@@ -1,3 +1,20 @@
 include:
-  - docker-compose.yml
+  - docker-compose.base.yml
   - monitoring/docker-compose.yml
+services:
+  termit-nginx:
+    image: nginx:1.26-alpine
+    ports:
+      - ${HOST_PORT:-1234}:80
+    restart: always
+    depends_on:
+      - termit
+      - termit-server
+      - termit-db-server
+    environment:
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx
+      ROOT: ${ROOT}
+      ORIGIN: ${URL}
+      PORT: ${PUBLIC_PORT:-''}
+    volumes:
+      - ./nginx/nginx-monitoring.conf:/etc/nginx/templates/nginx.conf.template

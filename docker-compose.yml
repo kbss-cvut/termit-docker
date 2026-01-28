@@ -1,3 +1,5 @@
+include:
+  - docker-compose.base.yml
 services:
   termit-nginx:
     image: nginx:1.26-alpine
@@ -15,67 +17,3 @@ services:
       PORT: ${PUBLIC_PORT:-''}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/templates/nginx.conf.template
-  termit-db-server:
-    build:
-      context: db-server
-    image: termit-db-server
-    environment:
-      GDB_JAVA_OPTS: -Dgraphdb.external-url=${URL}${ROOT}/sluzby/db-server -Ddefault.min.distinct.threshold=67108864
-    restart: always
-    volumes:
-      - termit-db-server:/opt/graphdb/home
-  termit-server:
-    image: kbsscvut/termit
-    depends_on:
-      - termit-db-server
-    env_file:
-      - .env
-    environment:
-      SERVER_FORWARDHEADERSSTRATEGY: framework
-      SPRING_PROFILES_ACTIVE: admin-registration-only, lucene
-      SPRING_MAIL_HOST: ${MAIL_HOST}
-      SPRING_MAIL_PORT: ${MAIL_PORT:-587}
-      SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
-      SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
-      LOGGING_FILE_NAME: /tmp/storage/termit.log
-      TERMIT_URL: ${URL}${ROOT}
-      TERMIT_PERSISTENCE_LANGUAGE: cs
-      TERMIT_REPOSITORY_URL: http://termit-db-server:7200/repositories/termit
-      TERMIT_REPOSITORY_PUBLICURL: ${URL}${ROOT}/sluzby/db-server/repositories/termit
-      TERMIT_REPOSITORY_USERNAME: ${GDB_USERNAME}
-      TERMIT_REPOSITORY_PASSWORD: ${GDB_PASSWORD}
-      TERMIT_CORS_ALLOWEDORIGINS: ${URL}
-      TERMIT_SERVER_SERVLET_CONTEXT-PATH: ${ROOT}/sluzby/server
-      TERMIT_FILE_STORAGE: /tmp/storage
-      TERMIT_TEXTANALYSIS_URL: http://annotace-server:8080/annotate?enableKeywordExtraction=true
-      TERMIT_VALIDATIONSERVICEURL: http://validation-service:8080/validate
-      TERMIT_JWT_SECRETKEY: ${JWT_SECRET_KEY}
-      TERMIT_ACTUATOR_USERNAME: ${ACTUATOR_USERNAME}
-      TERMIT_ACTUATOR_PASSWORD: ${ACTUATOR_PASSWORD}
-    restart: always
-    volumes:
-      - termit-server:/tmp/storage
-  annotace-server:
-    image: ghcr.io/kbss-cvut/annotace/annotace-spark:latest
-    volumes:
-      - annotace-server:/tmp
-  validation-service:
-    image: ghcr.io/kbss-cvut/validation-service/validation-service:latest
-    depends_on:
-      - termit-db-server
-    environment:
-      VALIDATOR_REPOSITORYURL: http://termit-db-server:7200/repositories/termit
-      VALIDATOR_USERNAME: ${GDB_USERNAME}
-      VALIDATOR_PASSWORD: ${GDB_PASSWORD}
-  termit:
-    image: kbsscvut/termit-ui
-    depends_on:
-      - termit-server
-    environment:
-      SERVER_URL: ${URL}${ROOT}/sluzby/server
-      ADMIN_REGISTRATION_ONLY: "true"
-      SHOW_PUBLIC_VIEW_ON_UNAUTHORIZED: "true"
-volumes:
-  termit-db-server:
-  termit-server:
-  annotace-server:
