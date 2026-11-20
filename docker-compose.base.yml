@@ -11,7 +11,8 @@ services:
   termit-server:
     image: kbsscvut/termit
     depends_on:
-      - termit-db-server
+      termit-db-server:
+        condition: "service_healthy"
     env_file:
       - .env
     environment:
