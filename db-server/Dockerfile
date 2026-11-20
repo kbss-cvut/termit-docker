@@ -18,5 +18,12 @@ COPY repo-init.sh ${GRAPHDB_INSTALL_DIR}/repo-init.sh
 
 EXPOSE 7200
 
+# Health check asking for termit repository
+# When security is enabled, it wont be able to ensure repository existence and will accept 401 as success
+HEALTHCHECK --start-period=15s \
+    CMD curl -s -o /dev/null -w '%{http_code}' --max-time 5 \
+        http://localhost:7200/rest/monitor/repository/termit \
+        | grep -qE '^(200|401)$' || exit 1
+
 CMD ${GRAPHDB_INSTALL_DIR}/repo-init.sh /termit-repo-config /termit-init-data ${GRAPHDB_HOME} & ${GRAPHDB_INSTALL_DIR}/bin/graphdb -Dgraphdb.home=${GRAPHDB_HOME} -Dgraphdb.logback=${GRAPHDB_INSTALL_DIR}/conf/logback.xml
 
