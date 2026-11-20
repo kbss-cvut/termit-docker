@@ -1,0 +1,21 @@
+@prefix tool: <http://onto.fel.cvut.cz/ontologies/ontology-migration-tool/> .
+
+# see https://github.com/kbss-cvut/ontology-migration-tool/blob/main/src/main/java/cz/cvut/kbss/versioning/VersionManager.java
+tool:versions {
+
+    _:cs1     tool:version-id "1" .
+    _:cs2     tool:version-id "2" .
+    _:cs3     tool:version-id "3" .
+    _:cs4     tool:version-id "4" .
+    _:cs5     tool:version-id "5" .
+    _:cs6     tool:version-id "6" .
+    _:cs7     tool:version-id "7" .
+    _:cs8     tool:version-id "8" .
+    _:cs9     tool:version-id "9" .
+    _:cs10    tool:version-id "10" .
+    _:cs11    tool:version-id "11" .
+    _:cs12    tool:version-id "12" .
+    _:cs13    tool:version-id "13" .
+    _:cs14    tool:version-id "14" .
+
+}
