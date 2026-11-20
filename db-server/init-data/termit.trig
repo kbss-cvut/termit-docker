@@ -4,6 +4,7 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix dd:    <http://onto.fel.cvut.cz/ontologies/data-description/> .
 
 <http://onto.fel.cvut.cz/ontologies/application/termit> {
     <http://onto.fel.cvut.cz/ontologies/application/termit>
@@ -22,7 +23,7 @@
                     "termit" ;
             <http://purl.org/vocab/vann/preferredNamespaceUri>
                     "http://onto.fel.cvut.cz/ontologies/application/termit/" ;
-            owl:imports     <http://onto.fel.cvut.cz/ontologies/data-description> , <http://rdfs.org/sioc/ns#> , <http://www.w3.org/ns/activitystreams#> , <http://purl.org/vocab/vann/> ;
+            owl:imports     <http://onto.fel.cvut.cz/ontologies/data-description> , <http://rdfs.org/sioc/ns#> , <http://www.w3.org/ns/activitystreams#> , <http://purl.org/vocab/vann/>, <https://www.w3.org/1999/02/22-rdf-syntax-ns> ;
             owl:versionInfo "2.0.0" ;
             owl:versionIRI  <http://onto.fel.cvut.cz/ontologies/application/termit/version/2.0.0> ;
             <http://www.w3.org/2004/02/skos/core#hasTopConcept>
@@ -688,6 +689,38 @@
                 "Custom attribute"@en , "Vlastní atribut"@cs ;
         rdfs:subClassOf rdf:Property .
 
+    termit:custom-attribute-profile
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , owl:Class ;
+        rdfs:subClassOf  termit:custom-attribute-profile-description ;
+        <http://www.w3.org/2004/02/skos/core#broader>
+                termit:custom-attribute-profile-description ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                <http://onto.fel.cvut.cz/ontologies/application/termit> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Custom attribute profile"@en , "Profil vlastních atributů"@cs ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "A named set of custom attributes."@en , "Pojmenovaná sada vlastních atributů."@cs .
+
+    termit:custom-attribute-profile-description
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , owl:Class ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                <http://onto.fel.cvut.cz/ontologies/application/termit> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Custom attribute profile description"@en , "Popis profilu vlastních atributů"@cs ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "A description of a custom attribute profile with its title"@en , "Popis profilu vlastních atributů s jeho názvem"@cs .
+
+    termit:has-custom-attribute
+        a       <http://www.w3.org/2004/02/skos/core#Concept> , owl:ObjectProperty ;
+        <http://www.w3.org/2004/02/skos/core#inScheme>
+                <http://onto.fel.cvut.cz/ontologies/application/termit> ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel>
+                "Has custom attribute"@en , "Má vlastní atribut"@cs ;
+        <http://www.w3.org/2004/02/skos/core#definition>
+                "Links a custom attribute to a profile."@en , "Přiřazuje vlastní atribut do profilu."@cs ;
+        rdfs:domain        termit:custom-attribute-profile ;
+        rdfs:range         termit:custom-attribute .
+
     termit:has-last-backup-datetime
             a       <http://www.w3.org/2004/02/skos/core#Concept> , owl:DatatypeProperty ;
             <http://www.w3.org/2004/02/skos/core#broader>
@@ -713,4 +746,27 @@
             <http://www.w3.org/2004/02/skos/core#prefLabel>
                     "Has expiration date"@en , "Má datum expirace"@cs ;
             rdfs:range          xsd:date .
+
+    termit:has-related-vocabulary
+            a       <http://www.w3.org/2004/02/skos/core#Concept> , owl:ObjectProperty ;
+            <http://www.w3.org/2004/02/skos/core#inScheme>
+                    <http://onto.fel.cvut.cz/ontologies/application/termit> ;
+            <http://www.w3.org/2004/02/skos/core#prefLabel>
+                    "Has related vocabulary"@en , "Má související slovník"@cs .
+
+    termit:reversible-change
+            a       skos:Concept , owl:Class ;
+            rdfs:subClassOf  dd:update-of-entity ;
+            skos:broader     dd:update-of-entity ;
+            skos:inScheme    <http://onto.fel.cvut.cz/ontologies/application/termit> ;
+            skos:prefLabel   "Reversible Change"@en , "Vratná změna"@cs .
+
+    termit:update-of-ordered-collection-members
+            a       skos:Concept , owl:Class ;
+            rdfs:subClassOf dd:update-of-entity ;
+            skos:broader    dd:update-of-entity ;
+            skos:inScheme   <http://onto.fel.cvut.cz/ontologies/application/termit> ;
+            skos:prefLabel  "Change of collection members"@en, "Změna členů kolekce"@cs ;
+            skos:definition "Change that modifies the members or the order of members of an ordered collection."@en,
+                            "Změna která mění členy, nebo jejich pořadí, v seřazené kolekci."@cs .
 }
